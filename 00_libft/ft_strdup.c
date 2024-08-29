@@ -1,32 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 16:52:03 by calberti          #+#    #+#             */
-/*   Updated: 2024/07/11 20:24:12 by calberti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-
-int	ft_strlen(char *str)
-{
-	int	nbr;
-
-	nbr = 0;
-	while (*str)
-	{
-		nbr ++;
-		str ++;
-	}
-	return (nbr);
-}
+#include "libft.h"
 
 char	*ft_strcpy(char *dest, char *src)
 {
@@ -52,7 +24,9 @@ char	*ft_strdup(char *src)
 	cpy = ft_strcpy(cpy, src);
 	return (cpy);
 }
+
 /*
+#include <stdio.h>
 int	main (void)
 {
 	char	*str = "phrase a copier";

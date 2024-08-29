@@ -1,16 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-int ft_strlen(char *str)
-{
-    int i;
-    
-    i = 0;
-    while (str[i])
-        i ++;
-    return (i);
-}
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -36,7 +24,7 @@ char	*ft_strrchr(const char *s, int c)
 }
 
 
-#include <stddef.h>
+/*
 #include <stdio.h>
 #include <string.h>
 int	main(int argc, char **argv)
@@ -52,6 +40,6 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
+*/
 
 

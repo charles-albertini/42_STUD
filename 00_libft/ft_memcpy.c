@@ -1,7 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "libft.h"
 // const void pointe vers qqchose qui ne peut pas etre modifie
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
@@ -20,7 +17,9 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest1);
 }
-
+/*
+#include <string.h>
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -35,4 +34,4 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
+*/

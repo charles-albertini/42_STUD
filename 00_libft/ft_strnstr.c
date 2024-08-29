@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char *ft_strnstr(const char *str1, const char *str2, size_t len)
 {
@@ -34,6 +32,9 @@ char *ft_strnstr(const char *str1, const char *str2, size_t len)
     }
     return(NULL);
 }
+/*
+#include <string.h>
+#include <stdio.h>
 
 int    main(int argc, char **argv)
 {
@@ -46,5 +47,5 @@ int    main(int argc, char **argv)
     }
     return (0);
 }
-
+*/
 

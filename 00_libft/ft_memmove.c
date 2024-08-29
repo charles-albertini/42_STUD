@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
@@ -29,8 +27,9 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest1);
 }
-
-
+/*
+#include <string.h>
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	char	*i;
@@ -44,5 +43,5 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
+*/
 

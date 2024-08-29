@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void    *ft_memchr(const void *s, int c, size_t n)
 {
@@ -20,7 +18,7 @@ void    *ft_memchr(const void *s, int c, size_t n)
     return (NULL);
 }
 
-
+/*
 #include <stdio.h>
 #include <string.h>
 int    main(int argc, char **argv)
@@ -36,5 +34,5 @@ int    main(int argc, char **argv)
     }
     return (0);
 }
-
+*/
 

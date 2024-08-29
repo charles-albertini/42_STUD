@@ -1,26 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 13:39:30 by calberti          #+#    #+#             */
-/*   Updated: 2024/07/18 13:39:32 by calberti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
@@ -41,6 +19,7 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	return (len);
 }
 /*
+#include <stdio.h>
 int	main()
 {
 	char src[] = "salut";

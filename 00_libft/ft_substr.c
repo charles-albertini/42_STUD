@@ -1,16 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-
-int ft_strlen (char *str)
-{
-	int i = 0;
-
-	while (str[i])
-		i ++;
-	return(i);
-}
+#include "libft.h"
 
 char    *ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -38,12 +26,12 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
 	out[start] = '\0';
 	return (out);   
 }
-
-
+/*
+#include <stdio.h>
 
 int    main(int argc, char **argv)
 {
 	if (argc == 4)
     	printf("%s\n", ft_substr(argv[1], atoi(argv[2]), atoi(argv[3])));
 }
-
+*/

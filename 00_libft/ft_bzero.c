@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -15,7 +13,9 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-
+/*
+#include <string.h>
+#include <stdio.h>
 int	main(void)
 {
 	char	tab[5] = {'1', '2', '3', '4', '5'};
@@ -40,3 +40,4 @@ int	main(void)
 	}
 	printf("\n");
 }
+*/

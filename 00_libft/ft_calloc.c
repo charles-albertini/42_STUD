@@ -1,7 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
+#include "libft.h"
 
 void    *ft_calloc(size_t nmemb, size_t size)
 {
@@ -19,8 +16,7 @@ void    *ft_calloc(size_t nmemb, size_t size)
     ft_bzero(tab, nmemb * size);
     return (tab);
 }
-
-
+/*
 
 int    main(void)
 {
@@ -28,4 +24,4 @@ int    main(void)
     tab = ft_calloc(0, 0);
     free(tab);
 }
-
+*/

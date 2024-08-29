@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h> 
+#include "libft.h"
 
 /*
  Un pointeur void est utiliser quand on ne connait pas d'avance sur quoi va pointer le pointeur.
@@ -22,7 +20,9 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-
+/*
+#include <string.h>
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	char	*i;
@@ -36,4 +36,4 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
+*/

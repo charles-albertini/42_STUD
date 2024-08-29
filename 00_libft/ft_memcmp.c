@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 int    ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -22,7 +20,7 @@ int    ft_memcmp(const void *s1, const void *s2, size_t n)
     return (s3[i] - s4[i]);
 }
 
-
+/*
 #include <stdio.h>
 #include <string.h>
 int    main(int argc, char **argv)
@@ -38,5 +36,5 @@ int    main(int argc, char **argv)
     }
     return (0);
 }
-
+*/
 

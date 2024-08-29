@@ -1,32 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/12 00:36:53 by calberti          #+#    #+#             */
-/*   Updated: 2024/07/12 00:36:55 by calberti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-
-int	ft_strlen(char *str)
-{
-	int	nbr;
-
-	nbr = 0;
-	while (*str)
-	{
-		nbr ++;
-		str ++;
-	}
-	return (nbr);
-}
 
 int	ft_all_len(int size, char **strs, char *sep)
 {
