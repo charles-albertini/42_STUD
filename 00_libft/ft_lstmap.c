@@ -122,9 +122,26 @@ void	ft_lstclear(t_list **lst, void (*del)(void *)) // un double pointeur permet
 
 void ft_addone (void *nb) // PAS DEMANDE incremente de 1 lst -> content pour testeer la fonction lstiter
 {
+	if (nb == NULL)
+		return;
 	int *new = (int*)nb;
 	(*new) ++;
 	
+}
+
+void *double_value(void *content) // PAS DEMANDE pour tester la fonction lstmap
+{
+    if (content == NULL)
+        return NULL;
+
+    // Alloue un nouvel entier
+    int *new_value = malloc(sizeof(int));
+    if (new_value == NULL)
+        return NULL;
+
+    // Double la valeur pointée par content
+    *new_value = (*(int *)content) * 2;
+    return new_value;
 }
 void ft_lstiter(t_list *lst, void (*f)(void *))
 {
@@ -158,14 +175,14 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *)) // FAIRE
 
 	if (!lst || !f || !del)
 	{
-		return (0);
+		return (NULL);
 	}
 	i = 0;
 	len = ft_lstsize(lst);
 	newlist = NULL;
 	while (i < len)
 	{
-		new = ft_lstnew(f(lst->content)); // on met lst->content parce que il y a void *(*f)(void *) et non void (*f)(void *)
+		new = ft_lstnew(f(lst->content)); // void *(*f)(void *) renvoi un pointeur 
 		if (new == NULL)                 // si la fonction appliquer ne marche pas 
 			(*del)(lst);
 		ft_lstadd_back(&newlist, new);
@@ -190,21 +207,29 @@ int	main(int argc, char **argv)
 	ft_lstadd_front(&first, new);
 	ft_lstadd_back(&first, new2);
 	
-	printf("liste :\n");
+	printf("liste:\n");
 	aff_lst(first);
 
 	size = ft_lstsize(first);
-	printf("size : %d\n", size);
+	printf("\nsize: \n%d\n", size);
 
-	printf("last list :");
+	printf("\nlast list:\n");
 	aff_lst(ft_lstlast(first));
 
 	//ft_lstclear(&first, *ft_del);
 	//aff_lst(first);
 	
 	ft_lstiter(first, *ft_addone);
-	printf("iteration:\n");
+	printf("\niteration:\n");
 	aff_lst(first);
+
+	t_list *testmap = ft_lstmap(first, double_value, ft_del);
+	printf("\nmap:\n");
+	aff_lst(testmap);
+	
+
+
+
 
 	return (0);
 }
