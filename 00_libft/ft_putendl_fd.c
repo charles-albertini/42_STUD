@@ -1,23 +1,20 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);
 		i ++;
 	}
-    write(fd, "\n", 1);
-	
+	write(fd, "\n", 1);
 }
 
+/*
+#include <fcntl.h>
 
 int	main(int argc, char **argv)
 {
@@ -33,3 +30,4 @@ int	main(int argc, char **argv)
 //1 sortie standard
 //2 sortie d'erreur
 //3, 4, 5... les fichier qui seront succesivement ouvert
+*/

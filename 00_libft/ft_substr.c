@@ -1,14 +1,16 @@
 #include "libft.h"
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *str, unsigned int start, size_t len)
 {
-	unsigned char *str = (unsigned char *)s;
-	char *out;
-	unsigned int size = ft_strlen ((char *)str);
-	unsigned int end = (unsigned int) len;
-	size_t i = 0;
+	unsigned int	size;
+	unsigned int	end;
+	char			*out;
+	size_t			i;
 
-
+	i = 0;
+	str = (unsigned char *)s;
+	size = ft_strlen ((char *)str);
+	end = (unsigned int) len;
 	if (start > size)
 		return ("");
 	if (start + end > size)
@@ -18,13 +20,13 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	while (len > 0)
 	{
-			out[i] = str[start];
-			i ++;
-			start ++;
-            len --;
+		out[i] = str[start];
+		i ++;
+		start ++;
+		len --;
 	}
 	out[start] = '\0';
-	return (out);   
+	return (out);
 }
 /*
 #include <stdio.h>

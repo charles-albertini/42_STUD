@@ -1,26 +1,26 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
+#include "libft.h"
 
-int ft_intlen (long int n)
+int	ft_intlen(long int n)
 {
-	long int nb = 0;
+	long int	nb;
 
+	nb = 0;
 	while (n > 0)
 	{
-		n = n/ 10;
+		n = n / 10;
 		nb ++;
 	}
 	return (nb);
 }
 
-char *positiv(long int n)
+char	*positiv(long int n)
 {
-	int size = ft_intlen(n);
-	int size_save = size;
-	char *out;
+	int		size;
+	int		size_save;
+	char	*out;
 
+	size = ft_intlen(n);
+	size_save = size;
 	out = malloc (sizeof(char) * (size + 1));
 	if (out == NULL)
 		return (NULL);
@@ -33,13 +33,16 @@ char *positiv(long int n)
 	out [size_save] = '\0';
 	return (out);
 }
-char *negativ(long int n)
-{
-    n *= -1;
-	int size = ft_intlen(n);
-	int size_save = size;
-	char *out;
 
+char	*negativ(long int n)
+{
+	int		size;
+	int		size_save;
+	char	*out;
+
+	n *= -1;
+	size = ft_intlen(n);
+	size_save = size;
 	out = malloc (sizeof(char) * (size + 2));
 	if (out == NULL)
 		return (NULL);
@@ -53,9 +56,10 @@ char *negativ(long int n)
 	out [size_save + 1] = '\0';
 	return (out);
 }
+
 char	*ft_itoa(int n)
 {
-	char			*out;
+	char		*out;
 	long int	nb;
 
 	nb = (long int)n;
@@ -77,6 +81,9 @@ char	*ft_itoa(int n)
 	}
 	return (out);
 }
+/*
+#include <string.h>
+#include <stdio.h>
 
 int    main(int argc, char **argv)
 {
@@ -86,4 +93,4 @@ int    main(int argc, char **argv)
 	
     return (0);
 }
-
+*/

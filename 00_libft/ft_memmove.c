@@ -9,11 +9,11 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	i = 0;
 	dest1 = (unsigned char *)dest;
 	src1 = (unsigned char *)src;
-	if (dest > src) // ca signifie que la zone dest se trouve apres src dans la memoire et que ca peut donc creer un chevauchement 
+	if (dest > src)
 	{
 		while (n > 0)
 		{
-			dest1[n - 1] = src1[n - 1]; // on commence donc a copier a partir de la fin pour etre sur 
+			dest1[n - 1] = src1[n - 1];
 			n--;
 		}
 	}
@@ -43,5 +43,8 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+ //(dest > src)  ca signifie que la zone dest se trouve apres src
+ //dans la memoire et que ca peut donc creer un chevauchement
+ //dest1[n - 1] = src1[n - 1] on commence donc a copier a partir de la fin
+ //pour etre sur
 */
-

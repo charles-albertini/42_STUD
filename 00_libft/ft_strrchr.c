@@ -11,7 +11,7 @@ char	*ft_strrchr(const char *s, int c)
 		i = ft_strlen((char *)s);
 		return ((char *)&s2[i]);
 	}
-    i = ft_strlen((char *)s);
+	i = ft_strlen((char *)s);
 	while (i >= 0)
 	{
 		if (s[i] == (char)c)
@@ -22,8 +22,6 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
-
 /*
 #include <stdio.h>
 #include <string.h>
@@ -41,5 +39,3 @@ int	main(int argc, char **argv)
 	return (0);
 }
 */
-
-

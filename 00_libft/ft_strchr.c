@@ -2,27 +2,26 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-    int				i;
-    unsigned char	*str;
-    
-    str = (unsigned char *)s;
-    if (c == '\0')
-    {
-        i = ft_strlen((char *)s);
-        return ((char *)&str[i]);
-    }
-    i = 0;
-    while (s[i] != '\0')
-    {
-        if (s[i] == (char)c)
-        {
-            return ((char *)&str[i]);
-        }
-        i++;
-    }
-    return (NULL);
-}
+	int				i;
+	unsigned char	*str;
 
+	str = (unsigned char *)s;
+	if (c == '\0')
+	{
+		i = ft_strlen((char *)s);
+		return ((char *)&str[i]);
+	}
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+		{
+			return ((char *)&str[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}
 /*
 #include <stdio.h>
 #include <string.h>
@@ -40,5 +39,3 @@ int	main(int argc, char **argv)
 	return (0);
 }
 */
-
-

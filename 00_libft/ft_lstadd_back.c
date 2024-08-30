@@ -1,64 +1,6 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_list
-{
-	void *content;
-	struct s_list *next;
-}		t_list;
-
-t_list *ft_lstnew(void *content)
-{
-	t_list *new;
-
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-		return (NULL);
-	new -> content = content;
-	new -> next = NULL;
-	return (new);
-
-}
-void ft_lstadd_front(t_list **lst, t_list *new) 
-{
-	if ((lst == NULL) || (new == NULL))
-	{
-		return ;
-	}
-	new->next = *lst;
-	*lst = new;
-}
-
-int ft_lstsize(t_list *lst)
-{
-	int nb = 0;
-	while (lst != NULL)
-	{
-		lst = lst -> next;
-		nb ++;
-	}
-	return (nb);
-}
-
-t_list *ft_lstlast(t_list *lst)
-{
-	int i;
-	int len;
-	
-	i = 0;
-	len = ft_lstsize(lst);
-	while (i < len - 1)
-	{
-		lst = lst -> next;
-		i ++;
-	}
-	return (lst);
-}
-
-void ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*back;
 
@@ -72,6 +14,9 @@ void ft_lstadd_back(t_list **lst, t_list *new)
 	back = ft_lstlast(*lst);
 	back->next = new;
 }
+/*
+#include stdio.h>
+
 void aff_lst(t_list *lst)
 {
 	while (lst != NULL)
@@ -107,4 +52,4 @@ int	main(int argc, char **argv)
 	
 	return (0);
 }
-
+*/

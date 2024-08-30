@@ -1,14 +1,14 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
+#include "libft.h"
 
-int ft_nb_char(char const * str, char const *find)
+int	ft_nb_char(char const *str, char const *find)
 {
-	int nb = 0;
-	int i = 0;
-	int j = 0;
+	int	nb;
+	int	i;
+	int	j;
 
+	nb = 0;
+	i = 0;
+	j = 0;
 	while (str[i])
 	{
 		while (find[j])
@@ -21,39 +21,31 @@ int ft_nb_char(char const * str, char const *find)
 		i ++;
 	}
 	return (nb);
-
 }
-int ft_char_is(char const c, char const *find)
-{
-	int i = 0;
 
+int	ft_char_is(char const c, char const *find)
+{
+	int	i;
+
+	i = 0;
 	while (find[i])
 	{
 		if (find[i] == c)
-				return(1);
+			return (1);
 		i ++;
 	}
 	return (0);
-
 }
 
-int ft_strlen(char const *str)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int i = 0;
+	char	*out;
+	int		i;
+	int		j;
 
-	while (str[i])
-		i ++;
-	return (i);
-}
-
-char *ft_strtrim(char const *s1, char const *set)
-{
-	char *out;
-	int i = 0;
-	int j = 0;
-
-	out = malloc (sizeof(char) * (ft_strlen(s1) - (ft_nb_char(s1, set)) +1));
-
+	i = 0;
+	j = 0;
+	out = malloc (sizeof(char) * (ft_strlen(s1) - (ft_nb_char(s1, set)) + 1));
 	while (s1[i])
 	{
 		if (ft_char_is(s1[i], set) == 1)
@@ -64,18 +56,20 @@ char *ft_strtrim(char const *s1, char const *set)
 			j ++;
 			i ++;
 		}
-			
 	}
 	return (out);
 }
-
-int    main(int argc, char **argv)
-{
-	if (argc == 3)
-	{
-		printf("%s\n", ft_strtrim(argv[1], argv[2]));
-	}
-	
-
-}
-
+/*
+ #include <string.h>
+ #include <stdio.h>
+ 
+ int    main(int argc, char **argv)
+ {
+ if (argc == 3)
+ {
+ printf("%s\n", ft_strtrim(argv[1], argv[2]));
+ }
+ 
+ 
+ }
+ */

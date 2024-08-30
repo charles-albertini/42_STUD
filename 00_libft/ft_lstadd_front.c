@@ -1,30 +1,12 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_list
-{
-	void *content;
-	struct s_list *next;
-}		t_list;
+/* on veut ajouter un element au debut de la list on dit donc que
+ new -> next point vers le premier truc pour qu'il se mette avant
+ et ensuite on dit que mnt le premiere element est new on a donc
+ new en premier element qui point maintenent vers *lst qui est devenue
+ le deuxieme element */
 
-t_list *ft_lstnew(void *content)
-{
-	t_list *new;
-
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-		return (NULL);
-	new -> content = content;
-	new -> next = NULL;
-	return (new);
-
-}
-/* on veut ajouter un element au debut de la list on dit donc que new -> next point vers le premier truc pour qu'il se mette avant et ensuite on dit que mnt le premiere element est new
-on a donc new en premier element qui point maintenent vers *lst qui est devenue le deuxieme element */
-void ft_lstadd_front (t_list **lst, t_list *new) 
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if ((lst == NULL) || (new == NULL))
 	{
@@ -33,7 +15,8 @@ void ft_lstadd_front (t_list **lst, t_list *new)
 	new->next = *lst;
 	*lst = new;
 }
-
+/*
+#include <stdio.h>
 
 void aff_lst(t_list *lst)
 {
@@ -54,9 +37,9 @@ int	main(int argc, char **argv)
 	t_list *new = ft_lstnew(&nb2);
 	ft_lstadd_front(&first, new);
 	aff_lst(first);
-	
 
-	
+
+
 	return (0);
 }
-
+*/

@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 int	ft_all_len(int size, char **strs, char *sep)
 {
@@ -23,12 +20,9 @@ int	ft_all_len(int size, char **strs, char *sep)
 		}
 		j = 0;
 		i ++;
-		printf("%d \n", len);
 	}
-	printf("%d \n", len);
 	len_sep = ft_strlen(sep);
 	len += (len_sep * (size - 1));
-	printf("%d \n", len);
 	return (len);
 }
 
@@ -73,6 +67,9 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	return (out);
 }
 /*
+#include <stdio.h>
+#include <string.h>
+ 
 int	main(void)
 {
 	int size = 3;

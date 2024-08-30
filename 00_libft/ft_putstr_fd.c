@@ -1,23 +1,18 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);
 		i ++;
 	}
-	
 }
-
-
+/*
+#include <fcntl.h>
 int	main(int argc, char **argv)
 {
     int fd = open ("test.txt", O_WRONLY | O_CREAT, 0644);
@@ -32,3 +27,4 @@ int	main(int argc, char **argv)
 //1 sortie standard
 //2 sortie d'erreur
 //3, 4, 5... les fichier qui seront succesivement ouvert
+*/

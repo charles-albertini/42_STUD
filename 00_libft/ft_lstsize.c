@@ -1,40 +1,10 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_list
+int	ft_lstsize(t_list *lst)
 {
-	void *content;
-	struct s_list *next;
-}		t_list;
+	int	nb;
 
-t_list *ft_lstnew(void *content)
-{
-	t_list *new;
-
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-		return (NULL);
-	new -> content = content;
-	new -> next = NULL;
-	return (new);
-
-}
-void ft_lstadd_front(t_list **lst, t_list *new) 
-{
-	if ((lst == NULL) || (new == NULL))
-	{
-		return ;
-	}
-	new->next = *lst;
-	*lst = new;
-}
-
-int ft_lstsize(t_list *lst)
-{
-	int nb = 0;
+	nb = 0;
 	while (lst != NULL)
 	{
 		lst = lst -> next;
@@ -42,6 +12,9 @@ int ft_lstsize(t_list *lst)
 	}
 	return (nb);
 }
+/*
+#include <stdio.h>
+
 void aff_lst(t_list *lst)
 {
 	while (lst != NULL)
@@ -67,9 +40,9 @@ int	main(int argc, char **argv)
 	size = ft_lstsize(first);
 	aff_lst(first);
 	printf("\n%d\n", size);
-	
 
-	
+
+
 	return (0);
 }
-
+*/

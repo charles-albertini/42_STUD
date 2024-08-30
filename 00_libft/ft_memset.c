@@ -1,7 +1,8 @@
 #include "libft.h"
 
 /*
- Un pointeur void est utiliser quand on ne connait pas d'avance sur quoi va pointer le pointeur.
+ Un pointeur void est utiliser quand on ne connait pas d'avance
+ sur quoi va pointer le pointeur.
  C'est pour ca qu'apres on creer s2 en unsigned char.
  unsigned char est un entier non signé de 8 bits (0 à 255)
 */
@@ -15,7 +16,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	str = (unsigned char *)s;
 	while (i < n)
 	{
-        str[i] = c;
+		str[i] = c;
 		i++;
 	}
 	return (s);

@@ -1,18 +1,8 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
+#include "libft.h"
 
-typedef struct s_list
+t_list	*ft_lstnew(void *content)
 {
-	void *content;
-	struct s_list *next;
-}		t_list;
-
-t_list *ft_lstnew(void *content)
-{
-	t_list *new;
+	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	if (new == NULL)
@@ -20,9 +10,10 @@ t_list *ft_lstnew(void *content)
 	new -> content = content;
 	new -> next = NULL;
 	return (new);
-
 }
 /*
+#include <stdio.h>
+
 void aff_lst(t_list *lst)
 {
 	while (lst != NULL)
@@ -40,9 +31,9 @@ int	main(int argc, char **argv)
 	//int *val = nb;
 	t_list *first = ft_lstnew(&nb);
 	aff_lst(first);
-	
 
-	
+
+
 	return (0);
 }
 */

@@ -1,28 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 21:24:58 by calberti          #+#    #+#             */
-/*   Updated: 2024/07/18 21:25:00 by calberti         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 int	ft_find(char c, char *charset)
 {
@@ -84,6 +60,9 @@ char	**ft_split(char *str, char *charset)
 	return (out);
 }
 /*
+ 
+#include <stdio.h>
+ 
 int	main(void)
 {
 	char	**out;
