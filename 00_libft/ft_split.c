@@ -1,20 +1,13 @@
 #include "libft.h"
 
-int	ft_find(char c, char *charset)
+int	ft_find(char c, char charset)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
+	if (c == charset)
+		return (1);
 	return (0);
 }
 
-char	*ft_creat(char *str, int first, int last)
+char	*ft_creat(char const *str, int first, int last)
 {
 	char	*out;
 	int		i;
@@ -32,7 +25,7 @@ char	*ft_creat(char *str, int first, int last)
 	return (out);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char const *str, char charset)
 {
 	char	**out;
 	int		first;
@@ -59,16 +52,16 @@ char	**ft_split(char *str, char *charset)
 	out[i_out] = 0;
 	return (out);
 }
+
 /*
- 
 #include <stdio.h>
- 
+
 int	main(void)
 {
 	char	**out;
 	int		i;
 
-	out = ft_split("salut comment ca vaaaaa", "au");
+	out = ft_split("saclut commcent ca vaacaaa", 'c');
 	i = 0;
 	while (out[i])
 	{
@@ -76,6 +69,6 @@ int	main(void)
 		free (out[i]);
 		i++;
 	}
-	free (out[i + 1]);		
+	free (out[i + 1]);
 }
 */

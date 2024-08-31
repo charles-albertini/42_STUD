@@ -1,84 +1,45 @@
 #include "libft.h"
 
-int	ft_all_len(int size, char **strs, char *sep)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
-	int	j;
-	int	len;
-	int	len_sep;
+	int		i;
+	int		j;
+	char	*str;
+	int		len;
 
 	i = 0;
 	j = 0;
-	len = 0;
-	len_sep = 0;
-	while (strs[i])
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc(sizeof(char) * len + 1);
+	if (str == NULL)
 	{
-		while (strs[i][j])
-		{
-			j ++;
-			len ++;
-		}
-		j = 0;
-		i ++;
+		return (NULL);
 	}
-	len_sep = ft_strlen(sep);
-	len += (len_sep * (size - 1));
-	return (len);
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }
 
-char	*ft_strcat(char *dest, char *src)
-{
-	int	nbr;
-	int	size;
-
-	nbr = 0;
-	size = ft_strlen(dest);
-	while (src[nbr])
-	{
-		dest [size + nbr] = src [nbr];
-		nbr ++;
-	}
-	dest [size + nbr] = '\0';
-	return (dest);
-}
-
-char	*ft_strjoin(int size, char **strs, char *sep)
-{
-	char	*out;
-	int		len;
-	int		i;
-
-	i = 0;
-	if (size == 0)
-	{
-		out = malloc(sizeof(char));
-		out[0] = '\0';
-		return (out);
-	}
-	len = ft_all_len(size, strs, sep);
-	out = malloc(sizeof(char) * len);
-	while (i < size)
-	{
-		ft_strcat(out, strs[i]);
-		if (i < size -1)
-			ft_strcat(out, sep);
-		i ++;
-	}
-	return (out);
-}
 /*
 #include <stdio.h>
-#include <string.h>
- 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	int size = 3;
-	//int len;
+	char	*i;
 
-	//len = ft_all_len(size, (char *[]){"bonjour", "salut", "non"}, "|||");
-	//printf("%d \n", len);
-	printf("%s \n", ft_strjoin(size, (char *[]){"hello",
-	"wo", "this"}, ", "));
-
+	if (argc == 3)
+	{
+		i = ft_strjoin(argv[1], argv[2]);
+		printf("%s", i);
+	}
+	return (0);
 }
 */

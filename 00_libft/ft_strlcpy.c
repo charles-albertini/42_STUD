@@ -1,9 +1,9 @@
 #include "libft.h"
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned int	i;
-	unsigned int	len;
+	size_t	i;
+	size_t	len;
 
 	len = ft_strlen(src);
 	i = 0;
@@ -20,10 +20,13 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 }
 /*
 #include <stdio.h>
+#include <string.h>
 int	main()
 {
 	char src[] = "salut";
 	char dest[] = "comment ca va ici";
-	printf("%d | %s", ft_strlcpy(dest, src, 3), dest);
+	printf("%zu | %s", ft_strlcpy(dest, src, 4), dest);
+	printf("\n");
+	printf("%zu | %s", strlcpy(dest, src, 4), dest);
 }
 */

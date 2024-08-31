@@ -8,7 +8,6 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 	size_t			i;
 
 	i = 0;
-	str = (unsigned char *)s;
 	size = ft_strlen ((char *)str);
 	end = (unsigned int) len;
 	if (start > size)
@@ -30,10 +29,13 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 }
 /*
 #include <stdio.h>
+#include <string.h>
 
 int    main(int argc, char **argv)
 {
 	if (argc == 4)
-    	printf("%s\n", ft_substr(argv[1], atoi(argv[2]), atoi(argv[3])));
+	{
+	    printf("%s\n", ft_substr(argv[1], atoi(argv[2]), atoi(argv[3])));
+	}
 }
 */
