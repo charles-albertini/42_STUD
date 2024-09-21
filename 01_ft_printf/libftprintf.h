@@ -6,7 +6,7 @@
 
 int	ft_printf(const char *format, ...);
 int	ft_isformat(char c);
-int	ft_format(va_list args, char c);
+int	ft_format(va_list *args, char c);
 int	ft_putchar(int c);
 int	ft_putstr(char *str);
 int	ft_strlen(char *str);
