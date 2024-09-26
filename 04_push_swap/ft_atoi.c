@@ -1,19 +1,19 @@
 #include "push_swap.h"
+#include <limits.h>
+#include <stdio.h>
 
 int	ft_atoi(char *str)
 {
 	int	nbr;
-	int	neg;
-	int	out;
+	long long	neg;
+	long long	out;
 
 	nbr = 0;
 	neg = 1;
 	out = 0;
-	while (str[nbr] == ' ' || str[nbr] == '\f' || str[nbr] == '\n'
-		|| str[nbr] == '\r' || str[nbr] == '\t' || str[nbr] == '\v')
-	{
+
+	while (str[nbr] == 32)
 		nbr ++;
-	}
 	if (str[nbr] == '+' || str[nbr] == '-')
 	{
 		if (str[nbr] == '-')
@@ -22,17 +22,23 @@ int	ft_atoi(char *str)
 	}
 	while (str[nbr] >= '0' && str[nbr] <= '9')
 	{
-		out = out * 10;
-		out = out + str[nbr] - '0';
+		out = out * 10 + (str[nbr] - '0');
 		nbr ++;
+		if ((out * neg > INT_MAX) || (neg == -1 && out
+				* neg < INT_MIN))
+			return (1);
 	}
-	return (neg * out);
+	return ((int)neg * (int)out);
 }
+
+//min: -2147483648
+//max: 2147483647
+
 /*
 #include <stdio.h>
- 
+
 int main (void)
-{	
+{
 	printf("%d \n", ft_atoi("    ---123"));
 	printf("%d \n", atoi("    ---123"));
 }

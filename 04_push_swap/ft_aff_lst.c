@@ -3,9 +3,17 @@
 
 void aff_lst(t_stack *lst)
 {
+	if (lst == NULL)
+	{
+		printf("liste vide\n");
+		return;
+	}
 	while (lst != NULL)
 	{
-		printf("%d\n", *(int *)(lst -> content));
+		if (lst -> content == NULL)
+			printf("NULL\n");
+		else
+			printf("%d\n", *(int *)(lst -> content));
 		lst = lst -> next;
 	}
 }

@@ -9,25 +9,15 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return(0);
 	stack_a = ft_getarg(argc, argv);
-	stack_b = ft_getarg(argc, argv);
+	stack_b = NULL;
 	if (stack_a == NULL)
 	{
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	aff_lst(stack_a);
-	printf("\n");
-	aff_lst(stack_b);
-	ft_rrr(&stack_a, &stack_b);
-	aff_lst(stack_a);
-	printf("\n");
-	aff_lst(stack_b);
-
-
+3
 }
 
-
-// LE CAS OU UN ARG EST INFERIEUR A INT_MIN OU SUPERIEUR A INT_MAX N'EST PAS GERER
 
 
 /*
