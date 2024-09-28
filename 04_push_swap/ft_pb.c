@@ -5,7 +5,7 @@ void ft_pb(t_stack **stack_a, t_stack **stack_b)
 	t_stack *new;
 	int *nb;
 
-	if (*stack_a == NULL || (*stack_a)->next == NULL)
+	if (*stack_a == NULL)
 		return;
 
 	nb = (*stack_a) -> content;

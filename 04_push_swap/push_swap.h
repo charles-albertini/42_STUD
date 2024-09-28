@@ -33,6 +33,14 @@ int			ft_atoi(char *str);
 t_stack		*ft_getarg(int argc, char **argv);
 int 		ft_findarg(int *nb, t_stack *first);
 int 		ft_only_int (char *str);
+int 		ft_issort(t_stack *stack_a);
+int 		ft_pivot(t_stack *stack, int size);
+int 		ft_new_pivot(t_stack *stack, int size);
+void 		ft_sort3(t_stack **stack_a);
+void 		ft_rev_sort3(t_stack **stack_b);
+void 		ft_sort2(t_stack **stack_a);
+void 		ft_rev_sort2(t_stack **stack_b);
+void 		ft_sort_pivot(t_stack **stack_a, t_stack **stack_b, int pivot);
 
 void 		ft_sa(t_stack **stack_a);
 void 		ft_sb(t_stack **stack_b);

@@ -10,10 +10,7 @@ void aff_lst(t_stack *lst)
 	}
 	while (lst != NULL)
 	{
-		if (lst -> content == NULL)
-			printf("NULL\n");
-		else
-			printf("%d\n", *(int *)(lst -> content));
+		printf("%d\n", *(int *)(lst -> content));
 		lst = lst -> next;
 	}
 }
