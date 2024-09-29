@@ -5,7 +5,7 @@ void aff_lst(t_stack *lst)
 {
 	if (lst == NULL)
 	{
-		printf("liste vide\n");
+		printf("vide\n");
 		return;
 	}
 	while (lst != NULL)

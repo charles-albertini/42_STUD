@@ -10,9 +10,12 @@ int	main(int argc, char **argv)
 	int pivot;
 	int verif_pivot;
 
-	if (argc == 1)
+	if (argc == 1) // fonction (stack_a, argc, argv) pour remplir stack_a
 		return(0);
-	stack_a = ft_getarg(argc, argv);
+	if (argc == 2)
+		stack_a = ft_getarg_str(argv[1]);
+	else
+		stack_a = ft_getarg(argc, argv);
 	stack_b = NULL;
 	if (stack_a == NULL)
 	{
@@ -20,54 +23,33 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 
-	size_a = ft_lstsize(stack_a);
-	if (size_a == 3)
-			ft_sort3(&stack_a);
-	if (size_a == 2)
-			ft_sort2(&stack_a);
+	ft_sort3(&stack_a);
+	ft_sort2(&stack_a);
 
+	size_a = ft_lstsize(stack_a);
 	pivot = ft_pivot(stack_a, size_a);
 
 	while((ft_issort(stack_a) == 1))
 	{
-		printf("\n");
-		printf("liste a debut :\n");
-		aff_lst(stack_a);
-		printf("\n");
-		printf("liste b debut :\n");
-		aff_lst(stack_b);
 		size_a = ft_lstsize(stack_a);
-		while (size_a > 3 && ft_issort(stack_a) == 1) // tant que il reste plus de 3 element on fait trie pivot sur A
+		while (size_a > 3 && ft_issort(stack_a) == 1)
 		{
 			ft_sort_pivot(&stack_a, &stack_b, pivot);
 			ft_sort3(&stack_a);
 			ft_sort2(&stack_a);
-			printf("aaaaaaaaaa\n");
 			size_a = ft_lstsize(stack_a);
 			pivot = ft_pivot(stack_a, size_a);
 		}
 
 		size_b = ft_lstsize(stack_b);
-
-		printf("\n");
-		printf("liste a apres:\n");
-		aff_lst(stack_a);
-		printf("\n");
-		printf("liste b apres:\n");
-		aff_lst(stack_b);
-
 		verif_pivot = pivot;
 		pivot = ft_pivot(stack_b, size_b);
 		if (pivot == verif_pivot)
 			pivot = ft_new_pivot(stack_b, size_b);
 		while (stack_b)
         	ft_pa(&stack_a, &stack_b);
-			printf("\n");
-
-
-
 	}
-	printf("\n");
+
 	printf("liste a:\n");
 	aff_lst(stack_a);
 	printf("\n");
