@@ -36,26 +36,25 @@ SRC = ft_atoi.c	\
 		ft_toupper.c
 OBJ = $(SRC:.c=.o)
 
-BONUS = ft_lstnew.c	\
-		ft_lstadd_front.c	\
-		ft_lstsize.c	\
-		ft_lstlast.c	\
-		ft_lstadd_back.c	\
-		ft_lstdelone.c	\
-		ft_lstclear.c	\
-		ft_lstiter.c	\
-		ft_lstmap.c
+BONUS = ft_lstnew_bonus.c	\
+		ft_lstadd_front_bonus.c	\
+		ft_lstsize_bonus.c	\
+		ft_lstlast_bonus.c	\
+		ft_lstadd_back_bonus.c	\
+		ft_lstdelone_bonus.c	\
+		ft_lstclear_bonus.c	\
+		ft_lstiter_bonus.c	\
+		ft_lstmap_bonus.c
 BOBJ = $(BONUS:.c=.o)
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -f
-HEADER = libft.h
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-		ar -rcs $@ $^
+		ar -rcs $(NAME) $(OBJ)
 
 bonus:	$(OBJ) $(BOBJ)
 		ar rcs $(NAME) $(OBJ) $(BOBJ)
@@ -72,3 +71,11 @@ fclean : clean
 re : fclean all
 
 .PHONY: all bonus clean fclean re
+
+# ar s creer un index pour que le programme retrouve plus facilement les fonctions 
+# ar r ajoute les fichiers objet dans l'archive 
+# ar c creer l'archive si elle n'existe pas
+# ar ... name obj, on creer la bibliotheque NAME en mettant les OBJ dedans 
+# cc -c, le -c (compile only), compile uniquement pour avor un fichier o a partir d'un fichier c sans creer d'executable 
+# le % represente n'importe quel nom de fichier
+# on compile avec -o pour dire que le nom des fichier o sera le nom des fichier c

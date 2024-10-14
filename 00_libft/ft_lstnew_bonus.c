@@ -1,34 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 12:25:06 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:25:11 by calberti         ###   ########.fr       */
+/*   Created: 2024/10/14 12:34:16 by calberti          #+#    #+#             */
+/*   Updated: 2024/10/14 12:34:19 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalpha(int c)
+t_list	*ft_lstnew(void *content)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	else
-		return (0);
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (new == NULL)
+		return (NULL);
+	new -> content = content;
+	new -> next = NULL;
+	return (new);
 }
 /*
 #include <stdio.h>
 
-int main (void)
+void aff_lst(t_list *lst)
 {
-	char a = 'q';
-	if (ft_isalpha(a) == 1)
-		printf("1");
-	else
-		printf("0");
+	while (lst != NULL)
+	{
+		printf("%d\n", *(int *)(lst -> content));
+		lst = lst -> next;
+	}
+}
 
+int	main(int argc, char **argv)
+{
+	(void)argc;
+	(void)argv;
+	int nb = 8;
+	t_list *first = ft_lstnew(&nb);
+	aff_lst(first);
+
+
+
+	return (0);
 }
 */
