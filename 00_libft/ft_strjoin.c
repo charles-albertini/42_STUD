@@ -40,18 +40,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i + j] = '\0';
 	return (str);
 }
-
 /*
 #include <stdio.h>
 int	main(int argc, char **argv)
 {
-	char	*i;
+	char	*str;
 
 	if (argc == 3)
 	{
-		i = ft_strjoin(argv[1], argv[2]);
-		printf("%s", i);
+		str = ft_strjoin(argv[1], argv[2]);
+		printf("%s", str);
+		free(str);
 	}
+	
 	return (0);
 }
 */

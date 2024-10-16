@@ -29,7 +29,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (tab);
 }
 /*
-
 int    main(void)
 {
     int    *tab;

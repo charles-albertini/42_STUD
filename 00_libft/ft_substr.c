@@ -45,9 +45,12 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 
 int    main(int argc, char **argv)
 {
+	char *str;
 	if (argc == 4)
 	{
-	    printf("%s\n", ft_substr(argv[1], atoi(argv[2]), atoi(argv[3])));
+	    str = ft_substr(argv[1], atoi(argv[2]), atoi(argv[3]));
+	    printf("%s\n", str);
+	    free(str);
 	}
 }
 */
