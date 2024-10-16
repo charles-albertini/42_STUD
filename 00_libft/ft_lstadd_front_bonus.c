@@ -27,7 +27,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	new->next = *lst;
 	*lst = new;
 }
-
+/*
 #include <stdio.h>
 
 void aff_lst(t_list *lst)
@@ -54,4 +54,4 @@ int	main(int argc, char **argv)
 
 	return (0);
 }
-
+*/
