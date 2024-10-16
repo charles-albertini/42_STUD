@@ -54,7 +54,7 @@ RM = rm -f
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-		ar -rcs $(NAME) $(OBJ)
+		ar rcs $(NAME) $(OBJ)
 
 bonus:	$(OBJ) $(BOBJ)
 		ar rcs $(NAME) $(OBJ) $(BOBJ)
