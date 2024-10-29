@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:38:11 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/16 16:58:23 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:07:59 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,19 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = ft_count_after(s1, set);
 	k = 0;
 	len = ft_strlen(s1);
-	out = malloc (sizeof(char) * (len - (i + j) + 1));
+	if (len - (i + j) < 0)
+		out = malloc (sizeof(char) * 1);
+	else
+		out = malloc (sizeof(char) * (len - (i + j) + 1));
+	if (out == NULL)
+		return(NULL);
 	while (i < len - j)
 	{
 		out[k] = s1[i];
 		k ++;
 		i ++;
 	}
+	out[k] = '\0';
 	return (out);
 }
 /*
@@ -84,9 +90,10 @@ char	*ft_strtrim(char const *s1, char const *set)
  int    main(int argc, char **argv)
  {
 	char *str;
-	if (argc == 3)
+	(void)argv;
+	if (argc == 1)
  	{
-		str = ft_strtrim(argv[1], argv[2]);
+		str = ft_strtrim("  \t \t \n   \n\n\n\t", " \n\t");
  		printf("%s\n", str);
 		free(str);
  	}
