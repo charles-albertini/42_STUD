@@ -77,7 +77,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	return (out);
 }
-
+/*
  #include <string.h>
  #include <stdio.h>
  
@@ -91,4 +91,4 @@ char	*ft_strtrim(char const *s1, char const *set)
 		free(str);
  	}
  }
- 
+ */

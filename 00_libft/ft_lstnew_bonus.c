@@ -42,6 +42,7 @@ int	main(int argc, char **argv)
 	int nb = 8;
 	t_list *first = ft_lstnew(&nb);
 	aff_lst(first);
+	free(first);
 
 
 

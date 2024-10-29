@@ -99,9 +99,15 @@ char	*ft_itoa(int n)
 
 int    main(int argc, char **argv)
 {
-    
+    	char *str;
+    	
+    	str = ft_itoa(atoi(argv[1]));
 	if (argc == 2)
-	printf("%s\n", ft_itoa(atoi(argv[1])));
+	{
+		printf("%s\n", str);
+		free(str);
+	}
+		
 	
     return (0);
 }

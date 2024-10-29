@@ -16,7 +16,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*supp;
 
-	if (lst == NULL)
+	if (lst == NULL)  //IL FAUT RAJOUTER FREE, LA JE MET JUSTE A NULL MAIS SANS FRR
 	{
 		return ;
 	}

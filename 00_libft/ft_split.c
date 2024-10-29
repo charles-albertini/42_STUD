@@ -81,6 +81,6 @@ int	main(void)
 		free (out[i]);
 		i++;
 	}
-	free (out[i + 1]);
+	free(out);
 }
 */
