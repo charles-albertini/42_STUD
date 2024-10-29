@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:36:22 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:36:24 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/29 23:31:53 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_creat(char const *str, int first, int last)
 
 	size = last - first;
 	out = malloc(sizeof(char) * (size + 1));
+	if (out == NULL)
+		return(NULL);
 	i = 0;
 	while (i < size)
 	{
@@ -48,6 +50,8 @@ char	**ft_split(char const *str, char charset)
 	first = 0;
 	i_out = 0;
 	out = malloc(sizeof(char *) * (ft_strlen(str) + 1));
+	if (out == NULL)
+		return (NULL);
 	while (str[i])
 	{
 		while (str[i] && ft_find(str[i], charset) == 1)
@@ -73,7 +77,7 @@ int	main(void)
 	char	**out;
 	int		i;
 
-	out = ft_split("saclut commcent ca vaacaaa", 'c');
+	out = ft_split("  tripouille  42  ", ' ');
 	i = 0;
 	while (out[i])
 	{
