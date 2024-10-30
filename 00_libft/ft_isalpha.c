@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:25:06 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/15 18:55:51 by charlesalbe      ###   ########.fr       */
+/*   Updated: 2024/10/30 15:08:09 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int main (void)
 		printf("1");
 	else
 		printf("0");
-
 }
 */

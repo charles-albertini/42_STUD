@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:25:15 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:25:17 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:12:46 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_isascii(int c)
 int main (void)
 {
 	char test = 'q';
-	if (ft_isascii((int)test) == 1)
+	if (ft_isascii(test) == 1)
 		printf("1");
 	else 
 		printf("0");

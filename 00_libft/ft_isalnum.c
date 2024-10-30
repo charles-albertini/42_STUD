@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:24:56 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:24:58 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:10:04 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_isalnum(int c)
 int main (void)
 {
 	char nb = '3';
-	char nb2 = ';';
+	char nb2 = 'a';
 	if ((ft_isalnum(nb) == 1) && (ft_isalnum(nb2) == 1))
 		printf("1");
 	else

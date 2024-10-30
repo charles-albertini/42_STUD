@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:35:08 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/30 00:38:35 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:55:58 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	main(int argc, char **argv)
 {
 	char	*i;
 	char	*j;
-	(void)argv;
-	if (argc == 1)
+	
+	if (argc == 4)
 	{
-		i = ft_memcpy(((void*)0), ((void*)0), 3);
-		j = memcpy(((void*)0), ((void*)0), 3);
+		i = ft_memcpy(argv[1], argv[2], atoi(argv[3]));
+		j = memcpy(argv[1], argv[2], atoi(argv[3]));
 		printf("Mine : %s\nReal : %s\n", i, j);
 	}
 	return (0);
