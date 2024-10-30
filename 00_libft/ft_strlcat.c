@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:10 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/29 20:46:55 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:34:41 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	i = 0;
 	len_dest = ft_strlen(dst);
 	len_src = ft_strlen(src);
-	if (size <= len_dest) // si on a pas la place de copier 
+	if (size <= len_dest)
 		return (size + len_src);
 	while (src[i] != '\0' && i < (size - len_dest - 1))
 	{
@@ -31,8 +31,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[len_dest + i] = '\0';
 	return (len_dest + len_src);
 }
-
-
 
 /*
 #include <string.h>
@@ -50,4 +48,3 @@ printf("%s \n", dest);
  
 }
 */
-

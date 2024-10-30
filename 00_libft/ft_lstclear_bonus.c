@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:33:29 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:33:32 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:47:03 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*supp;
 
-	if (lst == NULL)  //IL FAUT RAJOUTER FREE, LA JE MET JUSTE A NULL MAIS SANS FRR
-	{
+	if (lst == NULL)
 		return ;
-	}
 	while (*lst)
 	{
 		supp = (*lst)->next;

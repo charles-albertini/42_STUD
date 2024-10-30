@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:49 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/29 21:16:34 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:33:54 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	nbr;
+	size_t			nbr;
 	unsigned char	*s3;
 	unsigned char	*s4;
 

@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:34:31 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/29 21:38:58 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:38:14 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	*s2;
 
 	i = 0;
-	s2 = (unsigned char *)s; // on cast en unsigned char pcq ca correspond a 1 octet
+	s2 = (unsigned char *)s;
 	while (i < n)
 	{
 		if (s2[i] == (unsigned char)c)
@@ -43,6 +43,7 @@ int    main(int argc, char **argv)
         i = ft_memchr(argv[1], atoi(argv[2]), atoi(argv[3]));
         j = memchr(argv[1], atoi(argv[2]), atoi(argv[3]));
         printf("Mine : %s\nReal : %s\n", i, j);
+		// on cast en unsigned char pcq ca correspond a 1 octet
     }
     return (0);
 }

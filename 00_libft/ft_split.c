@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:36:22 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/29 23:31:53 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:32:39 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_creat(char const *str, int first, int last)
 	size = last - first;
 	out = malloc(sizeof(char) * (size + 1));
 	if (out == NULL)
-		return(NULL);
+		return (NULL);
 	i = 0;
 	while (i < size)
 	{
@@ -37,6 +37,25 @@ char	*ft_creat(char const *str, int first, int last)
 	}
 	out[i] = '\0';
 	return (out);
+}
+
+int	ft_count(char const *str, char charset)
+{
+	int	nb;
+	int	i;
+
+	nb = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == charset && str[i])
+			i++;
+		if (str[i])
+			nb++;
+		while (str[i] != charset && str[i])
+			i++;
+	}
+	return (nb);
 }
 
 char	**ft_split(char const *str, char charset)
@@ -49,7 +68,7 @@ char	**ft_split(char const *str, char charset)
 	i = 0;
 	first = 0;
 	i_out = 0;
-	out = malloc(sizeof(char *) * (ft_strlen(str) + 1));
+	out = malloc(sizeof(char *) * (ft_count(str, charset) + 1));
 	if (out == NULL)
 		return (NULL);
 	while (str[i])
@@ -60,12 +79,9 @@ char	**ft_split(char const *str, char charset)
 		while (str[i] && ft_find(str[i], charset) == 0)
 			i++;
 		if (first != i)
-		{
-			out[i_out] = ft_creat(str, first, i);
-			i_out ++;
-		}
+			out[i_out++] = ft_creat(str, first, i);
 	}
-	out[i_out] = 0;
+	out[i_out] = NULL;
 	return (out);
 }
 

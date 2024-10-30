@@ -6,12 +6,13 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:56 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/29 22:01:16 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 00:35:22 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <bsd/string.h>
+
 char	*ft_strnstr(const char *str, const char *find, size_t len)
 {
 	size_t	i;
@@ -33,7 +34,7 @@ char	*ft_strnstr(const char *str, const char *find, size_t len)
 				k ++;
 				if (find[j] == '\0' )
 					return ((char *)&str[i]);
-			}	
+			}
 		}
 		j = 0;
 		i ++;
