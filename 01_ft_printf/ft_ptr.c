@@ -1,12 +1,22 @@
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ptr.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 19:14:04 by calberti          #+#    #+#             */
+/*   Updated: 2024/10/30 19:14:06 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	ft_ptr(unsigned long int nb)
 {
 	int	len;
 
 	len = 0;
-	if (nb == 0)
-		return (len += ft_putstr("NULL"));
 	if (nb >= 16)
 		len += ft_ptr(nb / 16);
 	if (nb % 16 <= 9)

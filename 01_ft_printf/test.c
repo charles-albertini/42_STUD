@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	main(void)
 {
 	char c = 'D';
-	int nb = 42;
+	int nb = 0;
 	int nb2 = 45;
 	char *str = "salut";
-	int *ptr = &nb;
+	int *ptr = NULL;
 	unsigned int ui= 123456;
 	int hex = 1234;
 	
@@ -20,7 +20,7 @@ int	main(void)
 	ft_printf("Mine : %p \n", ptr);
 	printf("Real : %p \n", ptr);
     
-	ft_printf("Mine : %d %d \n", nb, nb2);
+	ft_printf("Mine : %d \n", nb);
 	printf("Real : %d \n", nb);
     
 	ft_printf("Mine : %i \n", nb);

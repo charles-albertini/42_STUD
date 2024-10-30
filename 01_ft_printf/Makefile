@@ -25,7 +25,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 # Compilation des fichiers objets
-%.o: %.c libftprintf.h
+%.o: %.c ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Nettoyage des fichiers objets

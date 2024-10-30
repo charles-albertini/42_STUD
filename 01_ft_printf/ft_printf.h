@@ -1,46 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 19:14:32 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/30 19:14:34 by calberti         ###   ########.fr       */
+/*   Created: 2024/10/30 19:17:14 by calberti          #+#    #+#             */
+/*   Updated: 2024/10/30 19:17:19 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_putstr(char *str)
-{
-	int	i;
+# include <stdarg.h>
+# include <unistd.h>
 
-	i = 0;
-	if (str == NULL)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i ++;
-	}
-	return (i);
-}
-/*
-#include <stdio.h>
-#include <unistd.h>
+int	ft_printf(const char *format, ...);
+int	ft_isformat(char c);
+int	ft_format(va_list *args, char c);
+int	ft_putchar(int c);
+int	ft_putstr(char *str);
+int	ft_strlen(char *str);
+int	ft_putnbr(int nb);
+int	ft_putnbrui(unsigned int nb);
+int	ft_hexa(unsigned int nb, char c);
+int	ft_ptr(unsigned long int nb);
 
-int main (int argc, char **argv)
-{
-	int len =0;
-
-	if (argc == 2)
-	{
-		len = ft_putstr(argv[1]);
-		printf("\n%d\n", len);
-	}
-}
-*/
+#endif
