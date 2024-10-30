@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:17:04 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/16 16:48:51 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:03:03 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int	ft_atoi(const char *str)
  
 int main (void)
 {	
-	printf("%d \n", ft_atoi("713565465464623354345364"));
-	printf("%d \n", atoi("713565465464623354345364"));
+	printf("%d \n", ft_atoi("\n\n-713565465"));
+	printf("%d \n", atoi("\n\n-713565465"));
 }
 */
-
-// GERER LE CAS OU SA DEPASSE INT MAX, SA DOIT RENVOYER -1

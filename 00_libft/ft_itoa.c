@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:31:58 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:32:00 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:33:58 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ char	*ft_itoa(int n)
 
 int    main(int argc, char **argv)
 {
-    	char *str;
+    char *str;
     	
-    	str = ft_itoa(atoi(argv[1]));
+    str = ft_itoa(atoi(argv[1]));
 	if (argc == 2)
 	{
 		printf("%s\n", str);

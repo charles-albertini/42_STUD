@@ -6,13 +6,13 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:36:28 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/30 00:00:02 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:38:44 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*Dans votre code, le caractère c est comparé avec les caractères de la chaîne. 
+/*le caractère c est comparé avec les caractères de la chaîne. 
 Lorsqu'un entier supérieur à 255 (comme 1024) est converti en unsigned char, 
 il est modifié par rapport à la taille de 256 (car 1024 % 256 = 0). 
 Cela signifie que c est effectivement traité comme '\0' (caractère nul).*/

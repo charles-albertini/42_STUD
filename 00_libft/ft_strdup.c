@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:36:50 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:36:53 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:11:47 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,7 @@ int	main (void)
 	free(strcpy);
 	free(strcpy2);
 }
+*/
+/*
+strdup c'est un strcpy mais qui alloue de la memoire
 */

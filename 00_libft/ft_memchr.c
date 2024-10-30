@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:34:31 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/30 00:38:14 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:44:51 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
 /*
 #include <stdio.h>
 #include <string.h>
@@ -47,4 +46,8 @@ int    main(int argc, char **argv)
     }
     return (0);
 }
+*/
+/*
+meme chose que strchr mais avec n'importe quoi 
+et on cherche dans une taille definie
 */

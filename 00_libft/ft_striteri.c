@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:36:57 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:36:59 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:50:44 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
@@ -23,19 +24,10 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 		i++;
 	}
 }
-
 /*
-void    f(unsigned int, char *s)
+void    f(unsigned int i, char *s)
 {
-    int    i;
-
-    i = 0;
-    while (s[i] != '\0')
-    {
-        write(1, &s[i], 1);
-        i++;
-    }
-    write(1, "\n", 1);
+    write(1, &s[i], 1);
 }
 int    main(int argc, char **argv)
 {

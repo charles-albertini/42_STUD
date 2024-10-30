@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:24:48 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/14 12:24:51 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:10:45 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,22 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (tab);
 }
 /*
+#include <stdio.h>
+
 int    main(void)
 {
     int    *tab;
-    tab = ft_calloc(0, 0);
-    free(tab);
+    tab = ft_calloc(5, sizeof(int));
+    
+	int i = 0;
+	while (i < 5)
+	{
+		printf("%d \n", tab[i]);
+		i++;
+	}
+	free(tab);	 
 }
+*/
+/*
+a l'inverse de malloc, calloc initialise la memoire a 0
 */

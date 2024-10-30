@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:56 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/30 00:35:22 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:49:57 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,9 @@ int    main(int argc, char **argv)
     }
     return (0);
 }
+*/
+/*
+cherche une osus chaine dans une chaine
+retourn un pointeur vers la premieree occuence trouve
+compiler avec -lbsd
 */
