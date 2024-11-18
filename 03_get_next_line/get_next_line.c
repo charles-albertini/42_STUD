@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     if (argc == 1) // si y a pas de fichier
 	fd = 0; // on met fd a 0, 0 est l'entre standard, on lance ./prog et apres on tape un mot
     nb = 0;
-    nb_read = 40;
+    nb_read = 40; //nombre de ligne a lire 
     
     while (nb < nb_read)
     {
