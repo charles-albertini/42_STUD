@@ -3,12 +3,12 @@
 void ft_rev_sort3(t_stack **stack_b)
 {
     t_stack *current = *stack_b;
-	t_stack *third_next = NULL;
+	//t_stack *third_next = NULL;
 
 	if (current != NULL && current->next != NULL && current->next->next != NULL)
 	{
-		third_next = current->next->next->next; // Sauvegarde du quatrième élément
-    	current->next->next->next = NULL;// On coupe temporairement la liste après les trois premiers éléments
+		//third_next = current->next->next->next; // Sauvegarde du quatrième élément
+    	//current->next->next->next = NULL;// On coupe temporairement la liste après les trois premiers éléments
 
 		int a = *(current->content);
     	int b = *(current->next->content);
@@ -33,10 +33,10 @@ void ft_rev_sort3(t_stack **stack_b)
 		}
 
 		// Réattacher le reste de la liste
-    	current = *stack_b;
-    	while (current->next != NULL)
-        	current = current->next;
-    	current->next = third_next;
+    	//current = *stack_b;
+    	//while (current->next != NULL)
+        	//current = current->next;
+    	//current->next = third_next;
 
 
 }
