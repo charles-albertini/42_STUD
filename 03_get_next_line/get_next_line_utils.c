@@ -6,21 +6,11 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:06:32 by calberti          #+#    #+#             */
-/*   Updated: 2024/11/18 22:41:59 by calberti         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:14:42 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i ++;
-	return (i);
-}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -37,6 +27,16 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
+char	*s1_null(char *s1)
+{
+	if (!s1)
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
+	return (s1);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
@@ -46,11 +46,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	if (!s1)
-	{
-		s1 = malloc(1);
-		s1[0] = '\0';
-	}
+	s1 = s1_null(s1);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(sizeof(char) * len + 1);
 	if (str == NULL)
@@ -70,14 +66,33 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
+char	*ft_new_buffer(char **buffer, int i)
+{
+	int		j;
+	char	*new_buffer;
+
+	j = 0;
+	new_buffer = malloc(ft_strlen(*buffer) - i + 1);
+	if (!new_buffer)
+		return (NULL);
+	j = 0;
+	while ((*buffer)[i])
+	{
+		new_buffer[j] = (*buffer)[i];
+		i++;
+		j++;
+	}
+	new_buffer[j] = '\0';
+	free(*buffer);
+	return (new_buffer);
+}
+
 char	*get_line_from_buffer(char **buffer)
 {
 	char	*line;
-	char	*new_buffer;
 	int		i;
 	int		j;
 
-	line = NULL;
 	i = 0;
 	j = 0;
 	if (!(*buffer) || !(*buffer)[0])
@@ -93,23 +108,8 @@ char	*get_line_from_buffer(char **buffer)
 		j++;
 	}
 	if ((*buffer)[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
 	line[i] = '\0';
-	new_buffer = malloc(ft_strlen(*buffer) - i + 1);
-	if (!new_buffer)
-		return (NULL);
-	j = 0;
-	while ((*buffer)[i])
-	{
-		new_buffer[j] = (*buffer)[i];
-		i++;
-		j++;
-	}
-	new_buffer[j] = '\0';
-	free(*buffer);
-	*buffer = new_buffer;
+	*buffer = ft_new_buffer(buffer, i);
 	return (line);
 }

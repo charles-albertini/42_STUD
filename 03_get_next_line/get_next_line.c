@@ -6,11 +6,36 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:06:04 by calberti          #+#    #+#             */
-/*   Updated: 2024/11/18 22:40:52 by calberti         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:57:29 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i ++;
+	return (i);
+}
+
+char	*malloc_temp(int fd)
+{
+	char	*temp_2;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	temp_2 = malloc (BUFFER_SIZE + 1);
+	if (temp_2 == NULL)
+	{
+		free(temp_2);
+		return (NULL);
+	}
+	return (temp_2);
+}
 
 char	*get_next_line(int fd)
 {
@@ -19,36 +44,18 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			bytes_read;
 
-	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	temp = malloc (BUFFER_SIZE + 1);
+	temp = malloc_temp(fd);
 	if (temp == NULL)
-	{
-		free(temp);
 		return (NULL);
-	}
 	while (1)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(temp);
-			return (NULL);
-		}
-		if (bytes_read == 0 && (!buffer || !*buffer))
-		{
-			free(temp);
-			return (NULL);
-		}
+			break ;
 		temp[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, temp);
 		if (buffer == NULL)
-		{
-			free(temp);
-			free(buffer);
-			return (NULL);
-		}
+			break ;
 		if (ft_strchr(buffer, '\n') || bytes_read == 0)
 			break ;
 	}
