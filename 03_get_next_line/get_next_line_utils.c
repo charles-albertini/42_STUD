@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/18 22:06:32 by calberti          #+#    #+#             */
+/*   Updated: 2024/11/18 22:41:59 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	ft_strlen(char *str)
@@ -10,23 +22,39 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	if (!s)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == '\0')
+		return ((char *)s);
+	return (NULL);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
 	int		len;
 	char	*str;
-	
+
 	i = 0;
 	j = 0;
 	if (!s1)
-	    s1 = ""; //pour la premiere lecture, s1 est null on le remplace donc par un chaine vide
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(sizeof(char) * len + 1);
 	if (str == NULL)
-	{
 		return (NULL);
-	}
 	while (s1[i] != '\0')
 	{
 		str[i] = s1[i];
@@ -38,61 +66,50 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	str[i + j] = '\0';
-	if (s1[0]) // si s1 n'est pas vide on le libere
-	    free(s1);
+	free(s1);
 	return (str);
 }
 
-// Fonction pour obtenir une ligne complète depuis le tampon
-char *get_line_from_buffer(char **buffer) // **char pour modifier directement le pointeur dans la fonction appelant
-{                                        // c'est un pointeur vers une adresse d'un pointeur
-    char 	*line;
-    char 	*new_buffer;
-    int 	i;
-    int 	j;
+char	*get_line_from_buffer(char **buffer)
+{
+	char	*line;
+	char	*new_buffer;
+	int		i;
+	int		j;
 
-    line = NULL;
-    i = 0;
-    j = 0;
-    // On cherche la fin de la ligne (délimitée par '\n' ou la fin de la chaîne)
-    while ((*buffer)[i] && (*buffer)[i] != '\n')
-	i++;
-
-    // On alloue l'espace pour la ligne (incluant '\0')
-    line = malloc(i + 2); // +1 pour '\0' et +1 pour '\n'
-    if (!line)
-	return NULL;
-
-    // On copie les caractères jusqu'à '\n' ou la fin de la chaîne
-    while (j < i) {
-	line[j] = (*buffer)[j];
-	j++;
-    }
-
-    // On ajoute '\n' s'il est présent
-    if ((*buffer)[i] == '\n') {
-	line[i] = '\n';
-	i++;
-    }
-
-    line[i] = '\0'; // Terminaison de la chaîne
-
-    // On met à jour le tampon pour retirer la ligne qu'on vient de lire
-    new_buffer = malloc(ft_strlen(*buffer) - i + 1);
-    if (!new_buffer)
-	return NULL;
-
-    j = 0;
-    while ((*buffer)[i])
-    {
-	new_buffer[j] = (*buffer)[i]; //on met dans le nouveau buffer le reste de l'ancien buffer
-	i++;
-	j++;
-    }
-    new_buffer[j] = '\0';
-
-    free(*buffer); // On libère l'ancien tampon
-    *buffer = new_buffer;
-
-    return line;
+	line = NULL;
+	i = 0;
+	j = 0;
+	if (!(*buffer) || !(*buffer)[0])
+		return (NULL);
+	while ((*buffer)[i] && (*buffer)[i] != '\n')
+		i++;
+	line = malloc(i + 2);
+	if (!line)
+		return (NULL);
+	while (j < i)
+	{
+		line[j] = (*buffer)[j];
+		j++;
+	}
+	if ((*buffer)[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
+	new_buffer = malloc(ft_strlen(*buffer) - i + 1);
+	if (!new_buffer)
+		return (NULL);
+	j = 0;
+	while ((*buffer)[i])
+	{
+		new_buffer[j] = (*buffer)[i];
+		i++;
+		j++;
+	}
+	new_buffer[j] = '\0';
+	free(*buffer);
+	*buffer = new_buffer;
+	return (line);
 }

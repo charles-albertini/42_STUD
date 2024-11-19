@@ -1,39 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/18 22:06:04 by calberti          #+#    #+#             */
+/*   Updated: 2024/11/18 22:40:52 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    static char *buffer = NULL;
-    char *temp = malloc (BUFFER_SIZE + 1); // on declare temp avec malloc pour gerer BUFF_SIZE = 10000000
-    char *line = NULL;
+	static char	*buffer = NULL;
+	char		*temp;
+	char		*line;
+	int			bytes_read;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
-	return (NULL);
-
-    while (1) {
-	// Lecture dans le fichier
-	int bytes_read = read(fd, temp, BUFFER_SIZE); // on lit fd, on stock dans temp et lit on lit BUFFER_SIZE octet
-	if (bytes_read < 0)
-	    return NULL; // Erreur de lecture
-	if (bytes_read == 0 && (!buffer || !*buffer)) // !buffer verifie si le poiteur buffer est null
-	{                                            //  !*buffer verifie si le contenue poiter par buffer est vide
-	    free(buffer);
-	    return NULL; // Fin du fichier et plus rien dans le buffer
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	temp = malloc (BUFFER_SIZE + 1);
+	if (temp == NULL)
+	{
+		free(temp);
+		return (NULL);
 	}
-
-	temp[bytes_read] = '\0';
-	buffer = ft_strjoin(buffer, temp);
-	if (buffer == NULL)
-	    return NULL;
-
+	while (1)
+	{
+		bytes_read = read(fd, temp, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			free(temp);
+			return (NULL);
+		}
+		if (bytes_read == 0 && (!buffer || !*buffer))
+		{
+			free(temp);
+			return (NULL);
+		}
+		temp[bytes_read] = '\0';
+		buffer = ft_strjoin(buffer, temp);
+		if (buffer == NULL)
+		{
+			free(temp);
+			free(buffer);
+			return (NULL);
+		}
+		if (ft_strchr(buffer, '\n') || bytes_read == 0)
+			break ;
+	}
+	free(temp);
 	line = get_line_from_buffer(&buffer);
-	if (line == NULL)
-	    return (NULL);
-	else
-	    return line;
-	
-    }
+	if (!line)
+		return (NULL);
+	return (line);
 }
 
+/*
 #include <stdio.h>
 int main(int argc, char *argv[])
 {
@@ -50,7 +76,7 @@ int main(int argc, char *argv[])
 	    return 1;
     }
     if (argc == 1) // si y a pas de fichier
-	fd = 0; // on met fd a 0, 0 est l'entre standard, on lance ./prog et apres on tape un mot
+	fd = 0; //0 est l'entre standard, on lance ./prog et apres on tape un mot
     nb = 0;
     nb_read = 40; //nombre de ligne a lire 
     
@@ -66,4 +92,4 @@ int main(int argc, char *argv[])
     close(fd);
     return 0;
 }
-
+*/
