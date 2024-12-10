@@ -13,9 +13,9 @@ int	main(int argc, char **argv)
 	if (argc == 1) // fonction (stack_a, argc, argv) pour remplir stack_a
 		return(0);
 	if (argc == 2)
-		stack_a = ft_getarg_str(argv[1]);
+		stack_a = ft_getarg_str(argv[1]); // si on a un truc du type "2 5 1 9 6 8" en un seul argument
 	else
-		stack_a = ft_getarg(argc, argv);
+		stack_a = ft_getarg(argc, argv); // si les nombres sont donne en plusieurs argument
 	stack_b = NULL;
 	if (stack_a == NULL)
 	{
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		while (size_a > 3 && ft_issort(stack_a) == 1)
 		{
 			ft_sort_pivot(&stack_a, &stack_b, pivot);
-			ft_sort3(&stack_a);
+			ft_sort3(&stack_a); // FAIRE UN SORT 5 ET 4
 			ft_sort2(&stack_a);
 			size_a = ft_lstsize(stack_a);
 			pivot = ft_pivot(stack_a, size_a);

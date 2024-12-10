@@ -11,8 +11,9 @@ void ft_sort_pivot(t_stack **stack_a, t_stack **stack_b, int pivot)
         if ((*(*stack_a)->content) <= pivot)
 		{
             ft_pb(stack_a, stack_b); // Déplacer vers stack_b
+			ft_rev_sort2(stack_b); 
 			ft_rev_sort3(stack_b);
-			ft_rev_sort2(stack_b);
+
         }
 		else
 		{
