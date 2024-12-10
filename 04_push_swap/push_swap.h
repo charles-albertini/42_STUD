@@ -62,14 +62,16 @@ void        sort_five(t_stack **stack_a, t_stack **stack_b);
 void        sort_large(t_stack **stack_a, t_stack **stack_b, int size);
 void        push_swap(t_stack **stack_a);
 void        chunk_sort(t_stack **stack_a, t_stack **stack_b, int size);
-void        push_chunk_to_b(t_stack **stack_a, t_stack **stack_b, int min, int max, int total_elements);
-void process_all_chunks(t_stack **stack_a, t_stack **stack_b, int *sorted_array, int size, int chunk_count, int current_chunk);
+void        push_chunk_to_b(t_stack **stack_a, t_stack **stack_b, int min, int max);
+void process_all_chunks(t_stack **stack_a, t_stack **stack_b, int *sorted_array, int chunk_count);
 void reinsert_to_a(t_stack **stack_a, t_stack **stack_b);
 void generate_sorted_array(t_stack *stack_a, int *sorted_array, int size);
 void chunk_sort_optimized(t_stack **stack_a, t_stack **stack_b, int size);
 void move_to_top(t_stack **stack, int pos, char stack_name);
 void push_closest_to_b(t_stack **stack_a, t_stack **stack_b, int min, int max, int total_elements);
 void process_chunks_optimized(t_stack **stack_a, t_stack **stack_b, int *sorted_array, int size, int chunk_count);
+int calculate_chunk_count(int size);
+void process_middle_to_extremes(t_stack **stack_a, t_stack **stack_b, int *sorted_array, int size, int chunk_size);
 
 
 

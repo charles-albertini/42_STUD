@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:36:55 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/09 13:57:53 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:52:47 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Fonction pour trier 4 éléments
 void    ft_sort4(t_stack **stack_a, t_stack **stack_b) 
 {
-    printf("sort 4\n");
+    //printf("sort 4\n");
     // Déplacer le plus petit élément dans `b`
     int min_pos = find_min_pos(*stack_a);
     move_min_to_top(stack_a, min_pos);

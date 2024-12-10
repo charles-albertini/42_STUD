@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:37:15 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/09 13:57:56 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:53:06 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void move_min_to_top(t_stack **stack, int min_pos) {
 // Fonction pour trier 5 éléments
 void ft_sort5(t_stack **stack_a, t_stack **stack_b) 
 {
-    printf("sort 5\n");
+    // printf("sort 5\n");
     // Déplacer le premier plus petit élément dans `b`
     int min_pos = find_min_pos(*stack_a);
     move_min_to_top(stack_a, min_pos);

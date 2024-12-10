@@ -46,7 +46,8 @@ int	main(int argc, char **argv)
 	// 	while (stack_b)
     //     	ft_pa(&stack_a, &stack_b);
 	// }
-
+	if (size_a <= 5)
+		ft_sort(size_a, &stack_a, &stack_b);
 	if (ft_issort(stack_a) == 1)
 		chunk_sort_optimized(&stack_a, &stack_b, size_a);
 

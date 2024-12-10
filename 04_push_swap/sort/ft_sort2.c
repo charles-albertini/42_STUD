@@ -5,7 +5,7 @@ void ft_sort2(t_stack **stack_a)
 	t_stack *current = *stack_a;
 	if (current != NULL && current->next != NULL)
 	{
-		printf("sort 2\n");
+		//printf("sort 2\n");
 		int a = *(current->content);          // Premier élément
     	int b = *(current->next->content);    // Deuxième élément
 

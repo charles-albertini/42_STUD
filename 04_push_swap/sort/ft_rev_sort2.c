@@ -5,7 +5,6 @@ void ft_rev_sort2(t_stack **stack_b)
 	t_stack *current = *stack_b;
 	if (current != NULL && current->next != NULL)
 	{
-		//printf("rev sort 2\n");
 		int a = *(current->content);          // Premier élément
     	int b = *(current->next->content);    // Deuxième élément
 

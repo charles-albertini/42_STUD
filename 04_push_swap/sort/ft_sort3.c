@@ -6,7 +6,7 @@ void ft_sort3(t_stack **stack_a)
 
 	if (current != NULL && current->next != NULL && current->next->next != NULL)
 	{
-		printf("sort 3\n");
+		//printf("sort 3\n");
 		int a = *(current->content);
     	int b = *(current->next->content);
     	int c = *(current->next->next->content);
