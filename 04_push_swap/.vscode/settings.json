@@ -59,6 +59,31 @@
   "files.associations": {
     "push_swap.h": "c",
     "iterator": "c",
-    "random": "c"
+    "random": "c",
+    "array": "c",
+    "bitset": "c",
+    "string_view": "c",
+    "initializer_list": "c",
+    "ranges": "c",
+    "span": "c",
+    "regex": "c",
+    "utility": "c",
+    "__hash_table": "c",
+    "__split_buffer": "c",
+    "__tree": "c",
+    "deque": "c",
+    "list": "c",
+    "map": "c",
+    "queue": "c",
+    "set": "c",
+    "stack": "c",
+    "string": "c",
+    "unordered_map": "c",
+    "vector": "c",
+    "chrono": "c",
+    "limits": "c",
+    "algorithm": "c",
+    "ratio": "c",
+    "stdio.h": "c"
   }
 }
