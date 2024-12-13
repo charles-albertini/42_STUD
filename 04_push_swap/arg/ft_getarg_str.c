@@ -68,6 +68,7 @@ t_stack	*ft_getarg_str(char *argv)
 		free(temp);
 		temp = malloc(ft_strlen(argv));
 	}
+	// free(temp);
 	return (first);
 }
 

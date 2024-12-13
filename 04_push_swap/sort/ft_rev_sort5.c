@@ -3,7 +3,7 @@
 
 
 // Fonction pour trouver la position du plus grand élément dans la pile
-int find_max_pos(t_stack *stack) {
+int find_max_pos5(t_stack *stack) {
     int max = INT_MIN;
     int pos = 0;
     int max_pos = 0;
@@ -51,12 +51,12 @@ void ft_rev_sort5(t_stack **stack_a, t_stack **stack_b)
 {
     printf("rev sort 5\n");
     // Déplacer le premier plus petit élément dans `b`
-    int max_pos = find_max_pos(*stack_b);
+    int max_pos = find_max_pos5(*stack_b);
     move_min_to_top(stack_b, max_pos);
     ft_pa(stack_a, stack_b);
 
     // Déplacer le second plus petit élément dans `b`
-    max_pos = find_max_pos(*stack_b);
+    max_pos = find_max_pos5(*stack_b);
     move_max_to_top(stack_b, max_pos);
     ft_pa(stack_a, stack_b);
 

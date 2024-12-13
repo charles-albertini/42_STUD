@@ -34,8 +34,10 @@ void move_to_top(t_stack **stack, int pos, char stack_name) {
 
     if (pos <= size / 2) {
         while (pos-- > 0) {
-            if (stack_name == 'a') ft_ra(stack);
-            else ft_rb(stack);
+            if (stack_name == 'a') 
+                ft_ra(stack);
+            else 
+                ft_rb(stack);
         }
     } else {
         pos = size - pos;
@@ -77,8 +79,8 @@ void push_chunk_to_b(t_stack **stack_a, t_stack **stack_b, int min, int max) {
 
 
 void process_middle_to_extremes(t_stack **stack_a, t_stack **stack_b, int *sorted_array, int size, int chunk_size) {
-    int min = size / 2 - chunk_size / 2; // Initialiser la plage centrale
-    int max = size / 2 + chunk_size / 2; 
+    int min = size / 2 -  chunk_size/ 2; // Initialiser la plage centrale
+    int max = size / 2 +  chunk_size/ 2; 
 
     while (min >= 0 || max < size) { // Tant qu'il reste des valeurs à traiter
         int total_elements = 0;
@@ -118,10 +120,10 @@ void process_middle_to_extremes(t_stack **stack_a, t_stack **stack_b, int *sorte
         }
 
         // Élargir les limites vers les extrémités
-        min -= chunk_size;
+        min -= chunk_size /2;
         if (min < 0) min = 0;
 
-        max += chunk_size;
+        max += chunk_size /2;
         if (max > size - 1) max = size - 1;
     }
 }
@@ -183,7 +185,7 @@ int calculate_chunk_count(int size) {
     } else if (size <= 200) {
         return 6; // 4 chunks pour une pile de taille moyenne
     } else if (size <= 500) {
-        return 20; // 8 chunks pour une pile plus grande
+        return 10; // 8 chunks pour une pile plus grande
     } else {
         return 10; // 10 chunks pour une très grande pile
     }

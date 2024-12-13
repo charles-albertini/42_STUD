@@ -87,6 +87,8 @@ void 		ft_rra(t_stack **stack_a);
 void 		ft_rrb(t_stack **stack_b);
 void 		ft_rrr(t_stack **stack_a, t_stack **stack_b);
 
+void free_stack(t_stack **stack);
+
 //bonus
 int	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);

@@ -56,7 +56,7 @@ all: $(NAME)
 
 # Création de la bibliothèque à partir des fichiers objets
 $(NAME): $(OBJS) $(HEADER)
-	ar rcs $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 # Compilation des fichiers objets
 %.o: %.c

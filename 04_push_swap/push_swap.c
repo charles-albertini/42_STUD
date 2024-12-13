@@ -1,5 +1,24 @@
 #include "push_swap.h"
 #include <stdio.h>
+void free_stack(t_stack **stack) {
+    t_stack *current;
+    t_stack *next;
+
+    if (!stack || !*stack)
+        return; // Rien à libérer si la pile est vide
+
+    current = *stack;
+
+    while (current) {
+        next = current->next; // Sauvegarde l'adresse du nœud suivant
+        if (current->content)
+            free(current->content); // Libère le contenu si alloué dynamiquement
+        free(current); // Libère le nœud actuel
+        current = next; // Passe au nœud suivant
+    }
+
+    *stack = NULL; // Assure que le pointeur de la pile est nul après la libération
+}
 
 int	main(int argc, char **argv)
 {
@@ -56,7 +75,8 @@ int	main(int argc, char **argv)
 	// printf("\n");
 	// printf("liste b:\n");
 	// aff_lst(stack_b);
-
+	// free(stack_b);
+ 	free_stack(&stack_a);
 
 }
 
