@@ -1,75 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_getarg_str.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/13 22:11:12 by calberti          #+#    #+#             */
+/*   Updated: 2024/12/14 01:12:04 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 #include <stdio.h>
 
-t_stack	*ft_getarg_str(char *argv)
+int	check_error(int *nb_add, char *temp, t_stack *first)
 {
-	int *nb_add;
-	t_stack *first;
-	t_stack *new;
-	char *temp;
-	int i;
-	int j;
-
-
-	i = 0;
-	j = 0;
-	temp = malloc(ft_strlen(argv));
-	nb_add = malloc(sizeof(int));
-
-	if (ft_only_int (argv))
-		return (NULL);
-	while (argv[i] == 32)
-		i++;
-	if (argv[i] == 43 || argv[i] == 45)
-		i++;
-	while (argv[i] >= 48 && argv[i] <= 57)
-	{
-		temp[j] = argv[i];
-		i++;
-		j++;
-	}
-
-	if ((ft_atoi(temp) == 1) && (ft_strlen(temp) > 9))
-			return (NULL);
-		else
-			*nb_add = ft_atoi(temp);
-	first = ft_lstnew(nb_add);
-	free(temp);
-	temp = malloc(ft_strlen(argv));
-
-	while (argv[i] != '\0')
-	{
-		j = 0;
-		while (argv[i] == 32)
-			i++;
-		if (argv[i] == 43 || argv[i] == 45)
-			i++;
-		while (argv[i] >= 48 && argv[i] <= 57)
-		{
-			temp[j] = argv[i];
-			i++;
-			j++;
-		}
-		nb_add = malloc(sizeof(int));
-		if ((ft_atoi(temp) == 1) && (ft_strlen(temp) > 9))
-			return (NULL);
-		else
-			*nb_add = ft_atoi(temp);
-		new = ft_lstnew(nb_add);
-		ft_lstadd_back(&first, new);
-		/*
-		if (ft_findarg(nb_add, first) == 0)
-		{
-			printf("la\n");
-			return (NULL);
-		}
-		*/
-
-		free(temp);
-		temp = malloc(ft_strlen(argv));
-	}
-	// free(temp);
-	return (first);
+	if (!(nb_add) || (ft_strlen(temp) > 10)
+		|| ((*nb_add == 1 && ft_strlen(temp) > 9)))
+		return (1);
+	if (ft_findarg(nb_add, first) == 0)
+		return (1);
+	return (0);
 }
 
+t_stack	*ft_getarg_str(char *argv)
+{
+	t_stack	*first;
+	char	temp[12];
+	int		*nb_add;
+	int		i;
+	int		j;
 
+	first = NULL;
+	i = 0;
+	while (argv[i])
+	{
+		while (argv[i] == ' ')
+			i++;
+		j = 0;
+		if (argv[i] == '+' || argv[i] == '-')
+			temp[j++] = argv[i++];
+		while (argv[i] >= '0' && argv[i] <= '9')
+			temp[j++] = argv[i++];
+		temp[j] = '\0';
+		nb_add = malloc(sizeof(int));
+		*nb_add = ft_atoi(temp);
+		if (check_error (nb_add, temp, first))
+			return (NULL);
+		ft_lstadd_back(&first, ft_lstnew(nb_add));
+	}
+	return (first);
+}

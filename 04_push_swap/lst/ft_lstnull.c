@@ -1,28 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnull.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/14 00:30:33 by calberti          #+#    #+#             */
+/*   Updated: 2024/12/14 00:59:30 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-t_stack *ft_lstnull(int size)
+void	ft_new_node(t_stack *new_node)
 {
-    t_stack *stack = NULL;
-    t_stack *current = NULL;
-	int i;
+	new_node->content = NULL;
+	new_node->next = NULL;
+}
+
+t_stack	*ft_lstnull(int size)
+{
+	t_stack	*stack;
+	t_stack	*current;
+	t_stack	*new_node;
+	int		i;
 
 	i = 0;
-    while (i < size)
+	stack = NULL;
+	current = NULL;
+	while (i < size)
 	{
-        t_stack *new_node = malloc(sizeof(t_stack));
-        new_node->content = NULL; // Contenu initialisé à NULL
-        new_node->next = NULL;
-
-        // Ajout du nouveau nœud à la pile
-        if (stack == NULL) {
-            stack = new_node; // Le premier nœud devient le nœud de tête
-            current = stack; // Initialiser le pointeur courant
-        } else {
-            current->next = new_node; // Ajouter le nouveau nœud
-            current = current->next; // Passer au nœud courant
-        }
+		new_node = malloc(sizeof(t_stack));
+		ft_new_node(new_node);
+		if (stack == NULL)
+		{
+			stack = new_node;
+			current = stack;
+		}
+		else
+		{
+			current->next = new_node;
+			current = current->next;
+		}
 		i++;
-    }
-
-    return (stack); // Retourner le pointeur vers la pile nouvellement créée
+	}
+	return (stack);
 }

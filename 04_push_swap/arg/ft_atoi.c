@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/14 00:22:32 by calberti          #+#    #+#             */
+/*   Updated: 2024/12/14 01:11:35 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 #include <limits.h>
 #include <stdio.h>
 
 int	ft_atoi(char *str)
 {
-	int	nbr;
-	long long	neg;
-	long long	out;
+	int				nbr;
+	long long		neg;
+	long long		out;
 
 	nbr = 0;
 	neg = 1;
 	out = 0;
-
 	while (str[nbr] == 32)
 		nbr ++;
 	if (str[nbr] == '+' || str[nbr] == '-')
@@ -30,16 +41,3 @@ int	ft_atoi(char *str)
 	}
 	return ((int)neg * (int)out);
 }
-
-//min: -2147483648
-//max: 2147483647
-
-/*
-#include <stdio.h>
-
-int main (void)
-{
-	printf("%d \n", ft_atoi("    ---123"));
-	printf("%d \n", atoi("    ---123"));
-}
-*/

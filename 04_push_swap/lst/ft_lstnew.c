@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/14 00:30:26 by calberti          #+#    #+#             */
+/*   Updated: 2024/12/14 01:00:00 by calberti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
 t_stack	*ft_lstnew(void *content)
@@ -11,29 +23,3 @@ t_stack	*ft_lstnew(void *content)
 	new -> next = NULL;
 	return (new);
 }
-/*
-#include <stdio.h>
-
-void aff_lst(t_stack *lst)
-{
-	while (lst != NULL)
-	{
-		printf("%d\n", *(int *)(lst -> content));
-		lst = lst -> next;
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	(void)argc;
-	(void)argv;
-	int nb = 8;
-	//int *val = nb;
-	t_stack *first = ft_lstnew(&nb);
-	aff_lst(first);
-
-
-
-	return (0);
-}
-*/

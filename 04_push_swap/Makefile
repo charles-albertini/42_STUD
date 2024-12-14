@@ -12,7 +12,6 @@ SRCS = ./lst/ft_aff_lst.c\
 		./arg/ft_getarg_str.c\
 		./arg/ft_getarg.c\
 		./sort/ft_issort.c\
-		./sort/ft_is_revsort.c\
 		./lst/ft_lstadd_back.c\
 		./lst/ft_lstadd_front.c\
 		./lst/ft_lstdellast.c\
@@ -21,34 +20,30 @@ SRCS = ./lst/ft_aff_lst.c\
 		./lst/ft_lstnew.c\
 		./lst/ft_lstnull.c\
 		./lst/ft_lstsize.c\
-		./pivot/ft_new_pivot.c\
+		./lst/ft_free_stack.c\
 		./arg/ft_only_int.c\
 		./move/ft_pa.c\
 		./move/ft_pb.c\
-		./pivot/ft_pivot.c\
 		./move/ft_ra.c\
 		./move/ft_rb.c\
-		./sort/ft_rev_sort.c\
-		./sort/ft_rev_sort2.c\
-		./sort/ft_rev_sort3.c\
-		./sort/ft_rev_sort4.c\
-		./sort/ft_rev_sort5.c\
 		./move/ft_rr.c\
 		./move/ft_rra.c\
 		./move/ft_rrb.c\
 		./move/ft_rrr.c\
 		./move/ft_sa.c\
 		./move/ft_sb.c\
-		./pivot/ft_sort_pivot.c\
 		./sort/ft_sort.c\
 		./sort/ft_sort2.c\
 		./sort/ft_sort3.c\
 		./sort/ft_sort4.c\
 		./sort/ft_sort5.c\
 		./move/ft_ss.c\
+		./move/ft_do_pbrb.c\
 		./arg/ft_strlen.c\
 		push_swap.c\
-		pushswap.c
+		pushswap.c\
+		utils.c\
+		utils2.c
 OBJS = $(SRCS:.c=.o)
 
 # Cible principale : créer la bibliothèque
