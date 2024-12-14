@@ -41,7 +41,7 @@ SRCS = ./lst/ft_aff_lst.c\
 		./move/ft_do_pbrb.c\
 		./arg/ft_strlen.c\
 		push_swap.c\
-		pushswap.c\
+		sort_chunck.c\
 		utils.c\
 		utils2.c
 OBJS = $(SRCS:.c=.o)
