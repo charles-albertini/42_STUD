@@ -6,14 +6,14 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:06:24 by calberti          #+#    #+#             */
-/*   Updated: 2024/11/18 22:49:08 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 02:59:22 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4
+#  define BUFFER_SIZE 10
 # endif
 
 # include <stdlib.h>

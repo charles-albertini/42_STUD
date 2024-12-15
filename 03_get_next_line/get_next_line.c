@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:06:04 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/06 16:31:00 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 03:52:45 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,30 @@ char	*malloc_temp(int fd)
 	return (temp_2);
 }
 
+void	*error_read(int bytes_read, char *temp, char **buffer)
+{
+	if (bytes_read < 0)
+	{
+		free(temp);
+		if (buffer != NULL && *buffer != NULL)
+			*buffer[0] = '\0';
+		return (NULL);
+	}
+	return (buffer);
+}
+
+void	*error_line(char *line, char **buffer)
+{
+	if (!line)
+	{
+		if (buffer != NULL && *buffer != NULL)
+			free(*buffer);
+		free(line);
+		return (NULL);
+	}
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buffer = NULL;
@@ -42,13 +66,11 @@ char	*get_next_line(int fd)
 	int			bytes_read;
 
 	temp = malloc_temp(fd);
-	if (temp == NULL)
-		return (NULL);
 	while (1)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
-		if (bytes_read < 0)
-			break ;
+		if (error_read(bytes_read, temp, &buffer) == 0)
+			return (NULL);
 		temp[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, temp);
 		if (buffer == NULL)
@@ -58,7 +80,7 @@ char	*get_next_line(int fd)
 	}
 	free(temp);
 	line = get_line_from_buffer(&buffer);
-	if (!line)
+	if (error_line(line, &buffer) == NULL)
 		return (NULL);
 	return (line);
 }
@@ -70,16 +92,16 @@ char	*get_next_line(int fd)
 //     char	*line;
 //     int		nb;
 //     int		nb_read;
-//     if (argc == 2) // si on a donner un fichier
+//     if (argc == 2) 
 //     {
 // 	fd = open(argv[1], O_RDONLY);
 // 	if (fd < 0)
-// 	    return 1;
+// 		return 0;    
 //     }
-//     if (argc == 1) // si y a pas de fichier
-// 	fd = 0; //0 est l'entre standard, on lance ./prog et apres on tape un mot
+//     if (argc == 1)
+// 		fd = 0;
 //     nb = 0;
-//     nb_read = 40; //nombre de ligne a lire 
+//     nb_read = 3;
 //     while (nb < nb_read)
 //     {
 // 	line = get_next_line(fd);
@@ -89,6 +111,8 @@ char	*get_next_line(int fd)
 // 	    break;
 // 	nb++;
 //     }
+
 //     close(fd);
+
 //     return 0;
 // }
