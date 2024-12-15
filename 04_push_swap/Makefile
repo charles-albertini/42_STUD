@@ -37,6 +37,7 @@ SRCS = ./lst/ft_aff_lst.c\
 		./sort/ft_sort3.c\
 		./sort/ft_sort4.c\
 		./sort/ft_sort5.c\
+		./sort/ft_sort6.c\
 		./move/ft_ss.c\
 		./move/ft_do_pbrb.c\
 		./arg/ft_strlen.c\

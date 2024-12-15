@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 03:59:19 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/14 07:08:23 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:33:03 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void		ft_sort2(t_stack **stack_a);
 void		ft_sort3(t_stack **stack_a);
 void		ft_sort4(t_stack **stack_a, t_stack **stack_b);
 void		ft_sort5(t_stack **stack_a, t_stack **stack_b);
+void		ft_sort6(t_stack **stack_a, t_stack **stack_b);
 int			find_min_pos(t_stack *stack);
 void		move_min_to_top(t_stack **stack, int min_pos);
 int			find_max_pos(t_stack *stack);
@@ -68,7 +69,6 @@ void		process_middle_to_extremes(t_stack **stack_a, t_stack **stack_b,
 int			get_total_element(t_stack **stack_a);
 int			check_pos_min(t_stack **stack_a, int *array, int size, int min);
 int			check_pos_max(t_stack **stack_a, int *array, int size, int max);
-
 void		ft_sa(t_stack **stack_a);
 void		ft_sb(t_stack **stack_b);
 void		ft_ss(t_stack **stack_a, t_stack **stack_b);

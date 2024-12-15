@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:06:04 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/15 03:52:45 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 16:50:14 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*get_next_line(int fd)
 //     if (argc == 1)
 // 		fd = 0;
 //     nb = 0;
-//     nb_read = 3;
+//     nb_read = 15;
 //     while (nb < nb_read)
 //     {
 // 	line = get_next_line(fd);

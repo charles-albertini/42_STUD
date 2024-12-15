@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:56:42 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/14 01:31:07 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:33:32 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void	ft_sort(int size_a, t_stack **stack_a, t_stack **stack_b)
 		ft_sort4(stack_a, stack_b);
 	if (size_a == 5 && ft_issort(*stack_a) == 1)
 		ft_sort5(stack_a, stack_b);
+	if (size_a == 6 && ft_issort(*stack_a) == 1)
+		ft_sort6(stack_a, stack_b);
 }

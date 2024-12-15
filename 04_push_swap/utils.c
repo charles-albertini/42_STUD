@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 02:09:49 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/14 04:01:57 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:32:34 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	calculate_chunk_count(int size)
 	else if (size <= 200)
 		return (6);
 	else if (size <= 500)
-		return (16);
+		return (14);
 	else
 		return (10);
 }
