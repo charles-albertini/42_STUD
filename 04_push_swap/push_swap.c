@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:50:43 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/15 20:35:12 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:42:10 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	if (stack_a == NULL)
 	{
 		write(2, "Error\n", 6);
-		return (0);
+		return (free_stack(&stack_a), 0);
 	}
 	if (ft_lstsize(stack_a) <= 6)
 		ft_sort(ft_lstsize(stack_a), &stack_a, &stack_b);

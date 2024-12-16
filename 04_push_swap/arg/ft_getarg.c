@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:12:24 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/13 23:56:00 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:45:27 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_stack	*ft_getarg(int argc, char **argv)
 		nb_add = malloc(sizeof(int));
 		*nb_add = ft_atoi(argv[argc]);
 		if (ft_findarg(nb_add, first) == 0)
-			return (NULL);
+			return (free(first), NULL);
 		new = ft_lstnew(nb_add);
 		ft_lstadd_front(&first, new);
 	}
