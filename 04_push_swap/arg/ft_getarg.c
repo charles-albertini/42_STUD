@@ -41,7 +41,7 @@ t_stack	*ft_getarg(int argc, char **argv)
 		nb_add = malloc(sizeof(int));
 		*nb_add = ft_atoi(argv[argc]);
 		if (ft_findarg(nb_add, first) == 0)
-			return (free(first), NULL);
+			return (free(nb_add), free_stack(&first), NULL);
 		new = ft_lstnew(nb_add);
 		ft_lstadd_front(&first, new);
 	}
