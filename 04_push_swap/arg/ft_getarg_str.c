@@ -52,7 +52,7 @@ t_stack	*ft_getarg_str(char *argv)
 		nb_add = malloc(sizeof(int));
 		*nb_add = ft_atoi(temp);
 		if (check_error (nb_add, temp, first))
-			return (free(nb_add), NULL);		
+			return (free(nb_add), NULL);
 		ft_lstadd_back(&first, ft_lstnew(nb_add));
 	}
 	return (first);
