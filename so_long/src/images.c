@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:37 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/13 16:55:56 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:05:11 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	update_moves_display(t_game *game)
 {
-	if (game->move_image)
+	if (game->move)
 		mlx_delete_image(game->mlx, game->move_image);
-	game->move_image = mlx_put_string(game->mlx, ft_itoa(game->move_count), 10, 10);
+	game->move = mlx_put_string(game->mlx, ft_itoa(game->move_count), 10, 10);
 }
 
 void	get_textures(t_game *game)

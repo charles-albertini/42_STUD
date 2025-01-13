@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:57:18 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/13 16:56:36 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:04:52 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_game
 	int					count_collec;
 	int					move_count;
 	int					n_collec;
-	mlx_image_t			*move_image;
+	mlx_image_t			*move;
 	char				**map_2;
 }						t_game;
 
