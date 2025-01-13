@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:43 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/12 22:29:21 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:57:20 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_game(t_game *game)
 	game->count_collec = 0;
 	game->mlx = mlx_init(game->map_width, game->map_height, "so_long", 1);
 	if (!(game->mlx))
-		return (ft_printf("Error\nError display"), 1);
+		return (ft_printf("Error\nError display\n"), 1);
 	get_textures(game);
 	get_images(game);
 	draw_map(game, game->imag);
