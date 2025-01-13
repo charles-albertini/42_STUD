@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:58 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/12 14:01:00 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:55:44 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	move_up(t_game *game)
 		game->imag->chara->instances->y -= MOVE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
+		update_moves_display(game);
 	}
 }
 
@@ -31,6 +32,7 @@ void	move_right(t_game *game)
 		game->imag->chara->instances->x += MOVE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
+		update_moves_display(game);
 	}
 }
 
@@ -42,6 +44,7 @@ void	move_down(t_game *game)
 		game->imag->chara->instances->y += MOVE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
+		update_moves_display(game);
 	}
 }
 
@@ -53,6 +56,7 @@ void	move_left(t_game *game)
 		game->imag->chara->instances->x -= MOVE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
+		update_moves_display(game);
 	}
 }
 

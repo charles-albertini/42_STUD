@@ -6,21 +6,28 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:37 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/12 14:02:29 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:55:56 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	update_moves_display(t_game *game)
+{
+	if (game->move_image)
+		mlx_delete_image(game->mlx, game->move_image);
+	game->move_image = mlx_put_string(game->mlx, ft_itoa(game->move_count), 10, 10);
+}
 
 void	get_textures(t_game *game)
 {
 	game->textu = malloc(sizeof(t_textures));
 	game->textu->floor = mlx_load_png("textures/floor.png");
 	game->textu->wall = mlx_load_png("textures/wall.png");
-	game->textu->collec = mlx_load_png("textures/Spark21.png");
-	game->textu->chara = mlx_load_png("textures/Mago.png");
-	game->textu->exit = mlx_load_png("textures/Salida.png");
-	game->textu->exit_2 = mlx_load_png("textures/Salida2.png");
+	game->textu->collec = mlx_load_png("textures/apple.png");
+	game->textu->chara = mlx_load_png("textures/bob.png");
+	game->textu->exit = mlx_load_png("textures/exit.png");
+	game->textu->exit_2 = mlx_load_png("textures/exit2.png");
 }
 
 void	get_images(t_game *game)

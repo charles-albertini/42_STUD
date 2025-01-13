@@ -13,7 +13,9 @@ OBJS    := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: $(MLX) $(NAME)
 
 $(MLX):
-	$(CLONE) https://github.com/codam-coding-college/MLX42.git $(MLX)
+	@if [ ! -d "$(MLX)" ]; then \
+		$(CLONE) https://github.com/codam-coding-college/MLX42.git $(MLX); \
+	fi
 	@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 
 $(OBJ_DIR)/%.o: %.c
@@ -25,11 +27,9 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@rm -rf $(NAME)
-	@rm -rf $(MLX)
 
 re: fclean all
 

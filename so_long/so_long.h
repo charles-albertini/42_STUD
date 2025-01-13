@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:57:18 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/12 14:05:12 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:56:36 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_game
 	int					count_collec;
 	int					move_count;
 	int					n_collec;
+	mlx_image_t			*move_image;
 	char				**map_2;
 }						t_game;
 
@@ -86,6 +87,7 @@ int		check_flood(char **map);
 int		total_collec(t_game *game);
 void	free_map(char **map);
 int		min_tiles(char **map);
+void	update_moves_display(t_game *game);
 void	get_textures(t_game *game);
 void	get_images(t_game *game);
 void	draw_map(t_game *game, t_images *image);
