@@ -1,5 +1,5 @@
 NAME    := so_long
-CFLAGS  := -Wextra -Wall -Werror -g
+CFLAGS  := -Wextra -Wall -Werror
 LIBMLX  := MLX42
 MLX		:= MLX42
 CLONE	:= git clone --depth=1
