@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:50:43 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/13 17:37:20 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:34:53 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (free_stack(&stack_a), 0);
 	}
+	// aff_lst(stack_a);
 	if (ft_lstsize(stack_a) <= 6)
 		ft_sort(ft_lstsize(stack_a), &stack_a, &stack_b);
 	if (ft_issort(stack_a) == 1)
 		chunk_sort_optimized(&stack_a, &stack_b, ft_lstsize(stack_a));
+	// aff_lst(stack_a);
 	free_stack(&stack_a);
 }
 	// printf("liste a:\n");

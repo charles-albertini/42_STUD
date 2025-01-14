@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:12:24 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/16 22:45:27 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:20:30 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 int	checker_arg2(int argc, char **argv)
 {
-	if (ft_only_int (argv[argc]))
-		return (1);
-	if ((ft_atoi(argv[argc]) == 1) && (ft_strlen(argv[argc]) > 9))
-		return (1);
+	while (argc > 1)
+	{
+		if (ft_only_int (argv[argc]))
+			return (1);
+		if ((ft_atoi(argv[argc]) == 1) && (ft_strlen(argv[argc]) > 9) && argv[argc][0] != '-')
+			return (1);
+		if ((ft_atoi(argv[argc]) == 1) && (ft_strlen(argv[argc]) > 10))
+			return (1);
+		argc--;
+	}
+	
 	return (0);
 }
 
@@ -43,6 +50,8 @@ t_stack	*ft_getarg(int argc, char **argv)
 		if (ft_findarg(nb_add, first) == 0)
 			return (free(nb_add), free_stack(&first), NULL);
 		new = ft_lstnew(nb_add);
+		if (!(new))
+			return (NULL);
 		ft_lstadd_front(&first, new);
 	}
 	return (first);

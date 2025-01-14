@@ -87,5 +87,6 @@
     "stdio.h": "c",
     "__locale": "c",
     "ios": "c"
-  }
+},
+"cmake.sourceDirectory": "/home/calberti/Documents/42_STUD/04_push_swap/push_swap_visualizer"
 }

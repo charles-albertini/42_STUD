@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 22:11:12 by calberti          #+#    #+#             */
-/*   Updated: 2024/12/16 22:41:17 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/14 00:55:30 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int	check_error(int *nb_add, char *temp, t_stack *first)
 {
-	if (!(nb_add) || (ft_strlen(temp) > 10)
-		|| ((*nb_add == 1 && ft_strlen(temp) > 9)))
+	if (!(nb_add) || (ft_strlen(temp) > 11)
+		|| ((*nb_add == 1 && ft_strlen(temp) > 10)))
 	{
 		free_stack(&first);
 		return (1);
@@ -32,7 +32,7 @@ int	check_error(int *nb_add, char *temp, t_stack *first)
 t_stack	*ft_getarg_str(char *argv)
 {
 	t_stack	*first;
-	char	temp[12];
+	char	temp[5000];
 	int		*nb_add;
 	int		i;
 	int		j;
