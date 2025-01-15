@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:25 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/12 13:58:26 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:49:22 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	total_collec(t_game *game)
 	return (total);
 }
 
-void	delete_orbs(t_game *game)
+void	delete_apple(t_game *game)
 {
 	int	i;
 	int	count;
@@ -57,12 +57,12 @@ void	delete_orbs(t_game *game)
 	}
 }
 
-void	collec_orbs(t_game *game)
+void	collec_apple(t_game *game)
 {
 	if (game->map[game->imag->chara->instances->y / 32]
 		[game->imag->chara->instances->x / 32] == MAP_COLLECTABLE)
 	{
-		delete_orbs(game);
+		delete_apple(game);
 		game->map[game->imag->chara->instances->y / 32]
 		[game->imag->chara->instances->x / 32] = MAP_FLOOR;
 		game->count_collec++;

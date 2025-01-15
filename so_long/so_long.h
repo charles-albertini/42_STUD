@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:57:18 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/13 17:04:52 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:10:14 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <memory.h>
 # include <fcntl.h>
 # include <stdint.h>
+# include <errno.h>
 
 # define MAP_EXIT 'E'
 # define MAP_ENTRY 'P'
@@ -96,7 +97,7 @@ void	move_up(t_game *game);
 void	move_right(t_game *game);
 void	move_down(t_game *game);
 void	move_left(t_game *game);
-void	collec_orbs(t_game *game);
-void	delete_orbs(t_game *game);
+void	collec_apple(t_game *game);
+void	delete_apple(t_game *game);
 
 #endif

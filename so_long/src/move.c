@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:58 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/13 16:55:44 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:49:37 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 		move_left(game);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		mlx_close_window(game->mlx);
-	collec_orbs(game);
+	collec_apple(game);
 }
