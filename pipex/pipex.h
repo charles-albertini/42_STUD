@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:47 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/17 08:06:51 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:14:00 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ void	execute_command(t_pipex *pipex, char *raw_cmd, char **envp);
 void	second_child(t_pipex *pipex, char **argv, char **envp);
 void	first_child(t_pipex *pipex, char **argv, char **envp);
 int		error_arg(int argc);
+void	error_file(t_pipex *pipex);
+void	error_dup(t_pipex *pipex);
+void	error_dup_2(t_pipex *pipex);
 
 #endif

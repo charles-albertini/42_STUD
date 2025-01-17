@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:42 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/17 08:08:25 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:12:49 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	if (error_arg(argc) == 1)
 		return (1);
 	if (pipe(pipex.pipe) < 0)
-		return (perror("Error pipe"),1);
+		return (perror("Error pipe"), 1);
 	pid1 = fork();
 	if (pid1 < 0)
 		return (perror("Error fork"), 1);
