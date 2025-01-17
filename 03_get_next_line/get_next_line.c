@@ -84,7 +84,7 @@ char *get_next_line(int fd)
 		return (NULL);
 	return (line);
 }
-
+/*
 #include <stdio.h>
 int main(int argc, char *argv[])
 {
@@ -116,3 +116,4 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+*/
