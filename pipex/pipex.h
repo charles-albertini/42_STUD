@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:47 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/17 06:14:43 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/17 08:06:51 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ char	*find_command_path(char *cmd, char **envp);
 void	execute_command(t_pipex *pipex, char *raw_cmd, char **envp);
 void	second_child(t_pipex *pipex, char **argv, char **envp);
 void	first_child(t_pipex *pipex, char **argv, char **envp);
-t_pipex	init_pipex(int argc, char **argv);
+int		error_arg(int argc);
 
 #endif
