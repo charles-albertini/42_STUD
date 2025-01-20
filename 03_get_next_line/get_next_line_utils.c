@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:06:32 by calberti          #+#    #+#             */
-/*   Updated: 2024/11/19 17:14:42 by calberti         ###   ########.fr       */
+/*   Updated: 2024/12/15 03:56:20 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,13 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*s1_null(char *s1)
-{
-	if (!s1)
-	{
-		s1 = malloc(1);
-		s1[0] = '\0';
-	}
-	return (s1);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_str(char *s1, char *s2, char *str)
 {
 	int		i;
 	int		j;
-	int		len;
-	char	*str;
 
 	i = 0;
 	j = 0;
-	s1 = s1_null(s1);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc(sizeof(char) * len + 1);
-	if (str == NULL)
-		return (NULL);
 	while (s1[i] != '\0')
 	{
 		str[i] = s1[i];
@@ -66,12 +49,38 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_new_buffer(char **buffer, int i)
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+
+	if (!s1)
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
+	if (ft_strlen(s1) + ft_strlen(s2) == 0)
+	{
+		free(s1);
+		return (NULL);
+	}
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	if (str == NULL)
+		return (NULL);
+	str = ft_str(s1, s2, str);
+	return (str);
+}
+
+char	*ft_new_buffer(char **buffer, int i, int error)
 {
 	int		j;
 	char	*new_buffer;
 
 	j = 0;
+	if (error == 1)
+	{
+		free(*buffer);
+		return (NULL);
+	}
 	new_buffer = malloc(ft_strlen(*buffer) - i + 1);
 	if (!new_buffer)
 		return (NULL);
@@ -92,16 +101,16 @@ char	*get_line_from_buffer(char **buffer)
 	char	*line;
 	int		i;
 	int		j;
+	int		error;
 
 	i = 0;
 	j = 0;
+	error = 0;
 	if (!(*buffer) || !(*buffer)[0])
 		return (NULL);
 	while ((*buffer)[i] && (*buffer)[i] != '\n')
 		i++;
 	line = malloc(i + 2);
-	if (!line)
-		return (NULL);
 	while (j < i)
 	{
 		line[j] = (*buffer)[j];
@@ -110,6 +119,8 @@ char	*get_line_from_buffer(char **buffer)
 	if ((*buffer)[i] == '\n')
 		line[i++] = '\n';
 	line[i] = '\0';
-	*buffer = ft_new_buffer(buffer, i);
+	if ((ft_strlen(*buffer) - i) == 0)
+		error = 1;
+	*buffer = ft_new_buffer(buffer, i, error);
 	return (line);
 }
