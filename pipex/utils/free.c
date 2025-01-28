@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 03:59:11 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/17 11:13:16 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:01:41 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	free_pipex(t_pipex *pipex)
 		free(pipex->cmd);
 }
 
-void	error_file(t_pipex *pipex)
+void	error_file(t_pipex *pipex, char *err)
 {
-	perror("Error file1");
+	perror(err);
 	close(pipex->pipe[0]);
 	close(pipex->pipe[1]);
 }
