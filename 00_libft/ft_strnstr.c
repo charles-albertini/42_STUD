@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:37:56 by calberti          #+#    #+#             */
-/*   Updated: 2024/10/30 16:49:57 by calberti         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:07:40 by charlesalbe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <bsd/string.h>
+//#include <bsd/string.h>
 
 char	*ft_strnstr(const char *str, const char *find, size_t len)
 {

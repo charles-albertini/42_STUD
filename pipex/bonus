@@ -1,0 +1,688 @@
+D'après le sujet, il y a deux bonus à implémenter :
+
+1. Gérer plusieurs pipes :
+```bash
+./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+```
+qui doit être équivalent à :
+```bash
+< file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
+```
+
+2. Gérer le "here_doc" :
+```bash
+./pipex here_doc LIMITER cmd cmd1 file
+```
+qui doit être équivalent à :
+```bash
+cmd << LIMITER | cmd1 >> file
+```
+
+Pour commencer, je suggère qu'on aborde d'abord le premier bonus (multiple pipes) car c'est une extension naturelle de votre code actuel. Voici les principales modifications à faire :
+
+1. Modifier la structure t_pipex pour gérer plusieurs pipes :
+```c
+typedef struct s_pipex
+{
+    int     infile;
+    int     outfile;
+    int     pipe_count;    // Nombre de pipes nécessaires
+    int     **pipes;       // Tableau de pipes
+    char    **paths;
+    char    **cmd_args;
+    char    *cmd;
+}   t_pipex;
+```
+
+2. Modifier la vérification des arguments pour accepter plus de commandes :
+```c
+int error_arg(int argc)
+{
+    if (argc < 5) // Minimum : file1 cmd1 cmd2 file2
+    {
+        ft_printf("Error: minimum 4 arguments needed\n");
+        return (1);
+    }
+    return (0);
+}
+```
+
+Voulez-vous qu'on commence par implémenter ces modifications ? Nous pourrons ensuite passer à la logique des processus multiples.
+
+D'accord, commençons par ces modifications. Je vais vous guider étape par étape.
+
+1. Premièrement, modifiez la structure dans `pipex.h` :
+
+```c
+typedef struct s_pipex
+{
+    int     infile;
+    int     outfile;
+    int     pipe_count;    
+    int     **pipes;       
+    char    **paths;
+    char    **cmd_args;
+    char    *cmd;
+}   t_pipex;
+```
+
+2. Ajoutez ces nouvelles fonctions dans `pipex.h` :
+
+```c
+// Nouvelles déclarations à ajouter
+void    init_pipes(t_pipex *pipex, int cmd_count);
+void    close_pipes(t_pipex *pipex);
+void    free_pipes(t_pipex *pipex);
+void    child_process(t_pipex *pipex, char **argv, char **envp, int i);
+```
+
+3. Modifiez `init.c` pour la nouvelle vérification des arguments :
+
+```c
+int error_arg(int argc)
+{
+    if (argc < 5)
+    {
+        ft_printf("Error: minimum 4 arguments needed\n");
+        return (1);
+    }
+    return (0);
+}
+
+void    init_pipes(t_pipex *pipex, int cmd_count)
+{
+    int i;
+
+    pipex->pipe_count = cmd_count - 1;
+    pipex->pipes = malloc(sizeof(int *) * pipex->pipe_count);
+    if (!pipex->pipes)
+        return ;
+    i = 0;
+    while (i < pipex->pipe_count)
+    {
+        pipex->pipes[i] = malloc(sizeof(int) * 2);
+        if (!pipex->pipes[i])
+        {
+            while (i > 0)
+                free(pipex->pipes[--i]);
+            free(pipex->pipes);
+            return ;
+        }
+        if (pipe(pipex->pipes[i]) < 0)
+        {
+            perror("Pipe error");
+            exit(1);
+        }
+        i++;
+    }
+}
+```
+
+4. Ajoutez une nouvelle fonction dans `free.c` pour libérer les pipes :
+
+```c
+void    free_pipes(t_pipex *pipex)
+{
+    int i;
+
+    i = 0;
+    while (i < pipex->pipe_count)
+    {
+        free(pipex->pipes[i]);
+        i++;
+    }
+    free(pipex->pipes);
+}
+
+void    close_pipes(t_pipex *pipex)
+{
+    int i;
+
+    i = 0;
+    while (i < pipex->pipe_count)
+    {
+        close(pipex->pipes[i][0]);
+        close(pipex->pipes[i][1]);
+        i++;
+    }
+}
+```
+
+Voulez-vous que je vous montre maintenant comment modifier le `main.c` pour gérer les processus multiples ?
+
+Je vais vous montrer comment modifier le `main.c` pour gérer plusieurs commandes. Voici le nouveau main :
+
+```c
+int main(int argc, char **argv, char **envp)
+{
+    t_pipex pipex;
+    int     i;
+    int     cmd_count;
+    pid_t   *pid;
+
+    if (error_arg(argc) == 1)
+        return (1);
+    cmd_count = argc - 3; // nombre de commandes
+    init_pipes(&pipex, cmd_count);
+    
+    // Allouer de la mémoire pour stocker les PIDs
+    pid = malloc(sizeof(pid_t) * cmd_count);
+    if (!pid)
+        return (1);
+
+    // Créer un processus pour chaque commande
+    i = 0;
+    while (i < cmd_count)
+    {
+        pid[i] = fork();
+        if (pid[i] < 0)
+            return (perror("Fork error"), 1);
+        if (pid[i] == 0)
+            child_process(&pipex, argv, envp, i);
+        i++;
+    }
+
+    // Fermer tous les pipes dans le processus parent
+    close_pipes(&pipex);
+
+    // Attendre tous les processus enfants
+    i = 0;
+    while (i < cmd_count)
+    {
+        waitpid(pid[i], NULL, 0);
+        i++;
+    }
+
+    // Libérer la mémoire
+    free(pid);
+    free_pipes(&pipex);
+    return (0);
+}
+```
+
+Maintenant, nous devons créer une nouvelle fonction `child_process` qui remplacera les anciennes fonctions `first_child` et `second_child`. Voici le code à mettre dans `child.c` :
+
+```c
+void    child_process(t_pipex *pipex, char **argv, char **envp, int i)
+{
+    // Premier processus
+    if (i == 0)
+    {
+        pipex->infile = open(argv[1], O_RDONLY);
+        if (pipex->infile < 0)
+        {
+            close_pipes(pipex);
+            exit(1);
+        }
+        dup2(pipex->infile, STDIN_FILENO);
+        dup2(pipex->pipes[i][1], STDOUT_FILENO);
+    }
+    // Dernier processus
+    else if (i == pipex->pipe_count)
+    {
+        pipex->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        if (pipex->outfile < 0)
+        {
+            close_pipes(pipex);
+            exit(1);
+        }
+        dup2(pipex->pipes[i - 1][0], STDIN_FILENO);
+        dup2(pipex->outfile, STDOUT_FILENO);
+    }
+    // Processus intermédiaires
+    else
+    {
+        dup2(pipex->pipes[i - 1][0], STDIN_FILENO);
+        dup2(pipex->pipes[i][1], STDOUT_FILENO);
+    }
+
+    close_pipes(pipex);
+    if (i == 0)
+        close(pipex->infile);
+    if (i == pipex->pipe_count)
+        close(pipex->outfile);
+
+    execute_command(pipex, argv[i + 2], envp);
+}
+```
+
+Ces modifications permettront à votre programme de gérer un nombre variable de commandes. Par exemple :
+```bash
+./pipex infile cmd1 cmd2 cmd3 outfile
+```
+
+Voulez-vous que j'explique plus en détail certaines parties du code ou que nous passions à la gestion des erreurs et aux tests ?
+
+D'accord, passons maintenant à l'implémentation du deuxième bonus : le "here_doc".
+
+Pour gérer le here_doc, nous devons :
+1. Modifier la vérification des arguments pour reconnaître "here_doc"
+2. Créer une fonction spéciale pour gérer l'entrée here_doc
+3. Modifier le comportement pour utiliser ">>" au lieu de ">" pour le fichier de sortie
+
+Voici les modifications à faire :
+
+1. D'abord, ajoutez ces fonctions dans `pipex.h` :
+```c
+void    handle_here_doc(t_pipex *pipex, char *limiter);
+int     is_here_doc(char *arg);
+```
+
+2. Créez un nouveau fichier `here_doc.c` :
+```c
+#include "../pipex.h"
+
+int is_here_doc(char *arg)
+{
+    return (arg && !ft_strncmp(arg, "here_doc", 9));
+}
+
+void    handle_here_doc(t_pipex *pipex, char *limiter)
+{
+    char    *line;
+    int     temp_fd;
+
+    temp_fd = open(".here_doc_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    if (temp_fd < 0)
+    {
+        perror("here_doc");
+        exit(1);
+    }
+    while (1)
+    {
+        ft_putstr_fd("heredoc> ", 1);
+        line = get_next_line(0);
+        if (!line)
+            break ;
+        if (!ft_strncmp(line, limiter, ft_strlen(limiter)) && 
+            line[ft_strlen(limiter)] == '\n')
+        {
+            free(line);
+            break ;
+        }
+        ft_putstr_fd(line, temp_fd);
+        free(line);
+    }
+    close(temp_fd);
+    pipex->infile = open(".here_doc_tmp", O_RDONLY);
+    if (pipex->infile < 0)
+    {
+        unlink(".here_doc_tmp");
+        exit(1);
+    }
+}
+```
+
+3. Modifiez le `main.c` pour gérer le here_doc :
+```c
+int main(int argc, char **argv, char **envp)
+{
+    t_pipex pipex;
+    int     i;
+    int     cmd_count;
+    pid_t   *pid;
+    int     here_doc;
+
+    here_doc = is_here_doc(argv[1]);
+    if ((!here_doc && argc < 5) || (here_doc && argc < 6))
+        return (ft_printf("Error: invalid number of arguments\n"), 1);
+
+    cmd_count = here_doc ? argc - 4 : argc - 3;
+    init_pipes(&pipex, cmd_count);
+    
+    if (here_doc)
+        handle_here_doc(&pipex, argv[2]);
+
+    pid = malloc(sizeof(pid_t) * cmd_count);
+    if (!pid)
+        return (1);
+
+    i = -1;
+    while (++i < cmd_count)
+    {
+        pid[i] = fork();
+        if (pid[i] < 0)
+            return (perror("Fork error"), 1);
+        if (pid[i] == 0)
+            child_process(&pipex, argv, envp, i, here_doc);
+    }
+
+    close_pipes(&pipex);
+    i = -1;
+    while (++i < cmd_count)
+        waitpid(pid[i], NULL, 0);
+
+    if (here_doc)
+        unlink(".here_doc_tmp");
+    free(pid);
+    free_pipes(&pipex);
+    return (0);
+}
+```
+
+4. Modifiez la fonction `child_process` pour gérer le here_doc :
+```c
+void    child_process(t_pipex *pipex, char **argv, char **envp, int i, int here_doc)
+{
+    if (i == 0)
+    {
+        if (!here_doc)
+        {
+            pipex->infile = open(argv[1], O_RDONLY);
+            if (pipex->infile < 0)
+            {
+                close_pipes(pipex);
+                exit(1);
+            }
+        }
+        dup2(pipex->infile, STDIN_FILENO);
+        dup2(pipex->pipes[i][1], STDOUT_FILENO);
+    }
+    else if (i == pipex->pipe_count)
+    {
+        int flags = O_WRONLY | O_CREAT;
+        flags |= here_doc ? O_APPEND : O_TRUNC;
+        
+        pipex->outfile = open(argv[argc - 1], flags, 0644);
+        if (pipex->outfile < 0)
+        {
+            close_pipes(pipex);
+            exit(1);
+        }
+        dup2(pipex->pipes[i - 1][0], STDIN_FILENO);
+        dup2(pipex->outfile, STDOUT_FILENO);
+    }
+    else
+    {
+        dup2(pipex->pipes[i - 1][0], STDIN_FILENO);
+        dup2(pipex->pipes[i][1], STDOUT_FILENO);
+    }
+
+    close_pipes(pipex);
+    execute_command(pipex, argv[here_doc ? i + 3 : i + 2], envp);
+}
+```
+
+Maintenant votre programme devrait gérer à la fois les pipes multiples et le here_doc. Vous pouvez le tester avec des commandes comme :
+
+```bash
+./pipex here_doc EOF cmd1 cmd2 outfile
+./pipex infile cmd1 cmd2 cmd3 cmd4 outfile
+```
+
+Voulez-vous que je vous montre comment ajouter des tests pour vérifier que tout fonctionne correctement ?
+
+Je vais vous montrer un script de test simple à mettre dans un fichier `test.sh` pour vérifier que les bonus fonctionnent correctement :
+
+```bash
+#!/bin/bash
+
+# Couleurs pour une meilleure lisibilité
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+# Créer des fichiers de test
+echo "Test file content" > infile
+echo "Hello World" >> infile
+echo "This is a test" >> infile
+echo "Testing pipes" >> infile
+
+echo -e "${BLUE}Testing multiple pipes...${NC}"
+
+# Test 1: Multiple pipes
+echo -e "${BLUE}Test 1: grep 'test' | tr 'e' 'E' | tr 't' 'T'${NC}"
+< infile grep "test" | tr 'e' 'E' | tr 't' 'T' > expected
+./pipex infile "grep test" "tr e E" "tr t T" outfile
+if diff expected outfile > /dev/null; then
+    echo -e "${GREEN}Test 1 passed${NC}"
+else
+    echo -e "${RED}Test 1 failed${NC}"
+fi
+
+# Test 2: Four commands
+echo -e "${BLUE}Test 2: cat | grep 'test' | tr 'e' 'E' | wc -l${NC}"
+< infile cat | grep "test" | tr 'e' 'E' | wc -l > expected
+./pipex infile "cat" "grep test" "tr e E" "wc -l" outfile
+if diff expected outfile > /dev/null; then
+    echo -e "${GREEN}Test 2 passed${NC}"
+else
+    echo -e "${RED}Test 2 failed${NC}"
+fi
+
+# Test 3: Here_doc
+echo -e "${BLUE}Test 3: Testing here_doc${NC}"
+cat << EOF > expected
+test line 1
+test line 2
+EOF
+
+./pipex here_doc EOF "cat" "grep test" outfile
+if diff expected outfile > /dev/null; then
+    echo -e "${GREEN}Test 3 passed${NC}"
+else
+    echo -e "${RED}Test 3 failed${NC}"
+fi
+
+# Test 4: Here_doc with multiple pipes
+echo -e "${BLUE}Test 4: Here_doc with multiple commands${NC}"
+cat << EOF > expected
+TEST line 1
+TEST line 2
+EOF
+
+./pipex here_doc EOF "cat" "tr 'test' 'TEST'" "grep TEST" outfile
+if diff expected outfile > /dev/null; then
+    echo -e "${GREEN}Test 4 passed${NC}"
+else
+    echo -e "${RED}Test 4 failed${NC}"
+fi
+
+# Nettoyage
+echo -e "${BLUE}Cleaning up...${NC}"
+rm -f infile outfile expected
+
+echo -e "${BLUE}All tests completed.${NC}"
+```
+
+Pour utiliser ce script :
+
+1. Sauvegardez-le dans un fichier `test.sh`
+2. Donnez-lui les permissions d'exécution :
+```bash
+chmod +x test.sh
+```
+3. Exécutez-le :
+```bash
+./test.sh
+```
+
+Ce script teste :
+- L'utilisation de plusieurs pipes
+- La fonctionnalité here_doc
+- La combinaison de here_doc avec plusieurs pipes
+- Différentes commandes Unix courantes (cat, grep, tr, wc)
+
+Il indique en vert les tests réussis et en rouge les tests échoués.
+
+Voulez-vous que j'ajoute d'autres tests spécifiques ou que j'explique plus en détail certains tests ?
+
+Voici un script de test plus complet qui teste davantage de cas d'utilisation :
+
+```bash
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+print_test_header() {
+    echo -e "\n${YELLOW}=== $1 ===${NC}"
+}
+
+check_result() {
+    if diff expected outfile > /dev/null; then
+        echo -e "${GREEN}✓ Success${NC}"
+        return 0
+    else
+        echo -e "${RED}✗ Failed${NC}"
+        echo -e "${BLUE}Expected output:${NC}"
+        cat expected
+        echo -e "${BLUE}Actual output:${NC}"
+        cat outfile
+        return 1
+    }
+}
+
+# Préparation des fichiers de test
+print_test_header "Setting up test files"
+echo "Hello World" > infile
+echo "This is a test file" >> infile
+echo "Multiple lines" >> infile
+echo "With some numbers 123" >> infile
+echo "AND UPPER CASE" >> infile
+echo "and lower case" >> infile
+echo "   spaces   at   start" >> infile
+echo "tabs		and		spaces" >> infile
+mkdir -p test_dir
+echo "test" > test_dir/test1
+echo "test2" > test_dir/test2
+
+# Test des erreurs
+print_test_header "Error handling tests"
+echo -e "${BLUE}Testing invalid number of arguments${NC}"
+./pipex infile
+echo -e "${BLUE}Testing non-existent input file${NC}"
+./pipex nonexistentfile "cat" "wc -l" outfile
+echo -e "${BLUE}Testing invalid command${NC}"
+./pipex infile "invalidcommand" "wc -l" outfile
+
+# Tests basiques avec deux commandes
+print_test_header "Basic two commands tests"
+
+echo -e "${BLUE}Test: cat + grep${NC}"
+< infile cat | grep "test" > expected
+./pipex infile "cat" "grep test" outfile
+check_result
+
+echo -e "${BLUE}Test: cat + wc${NC}"
+< infile cat | wc > expected
+./pipex infile "cat" "wc" outfile
+check_result
+
+# Tests avec plus de commandes
+print_test_header "Multiple commands tests"
+
+echo -e "${BLUE}Test: ls + grep + wc${NC}"
+ls -la | grep "test" | wc -l > expected
+./pipex infile "ls -la" "grep test" "wc -l" outfile
+check_result
+
+echo -e "${BLUE}Test: cat + grep + tr + sort${NC}"
+< infile cat | grep "e" | tr 'e' 'E' | sort > expected
+./pipex infile "cat" "grep e" "tr e E" "sort" outfile
+check_result
+
+# Tests here_doc
+print_test_header "Here_doc tests"
+
+echo -e "${BLUE}Test: Simple here_doc${NC}"
+cat << EOF > expected
+test1
+test2
+test3
+EOF
+
+./pipex here_doc EOF "cat" "grep test" outfile
+
+echo -e "${BLUE}Test: Here_doc with multiple commands${NC}"
+cat << LIMIT > expected
+TEST1
+TEST2
+TEST3
+LIMIT
+
+./pipex here_doc LIMIT "cat" "tr a-z A-Z" "grep TEST" outfile
+check_result
+
+# Tests avec différents types de commandes
+print_test_header "Various command types tests"
+
+echo -e "${BLUE}Test: find + grep${NC}"
+find . -type f | grep "test" > expected
+./pipex infile "find . -type f" "grep test" outfile
+check_result
+
+echo -e "${BLUE}Test: sort + uniq${NC}"
+< infile sort | uniq > expected
+./pipex infile "sort" "uniq" outfile
+check_result
+
+echo -e "${BLUE}Test: rev + cut${NC}"
+< infile rev | cut -c 1-5 > expected
+./pipex infile "rev" "cut -c 1-5" outfile
+check_result
+
+# Tests avec des chemins absolus
+print_test_header "Absolute path tests"
+
+echo -e "${BLUE}Test: Using absolute paths${NC}"
+/bin/cat infile | /usr/bin/grep "test" > expected
+./pipex infile "/bin/cat" "/usr/bin/grep test" outfile
+check_result
+
+# Tests avec des commandes comportant plusieurs arguments
+print_test_header "Multiple arguments tests"
+
+echo -e "${BLUE}Test: Commands with multiple arguments${NC}"
+< infile grep -i "TEST" | cut -d' ' -f1,2 > expected
+./pipex infile "grep -i TEST" "cut -d' ' -f1,2" outfile
+check_result
+
+# Nettoyage
+print_test_header "Cleaning up"
+rm -f infile outfile expected
+rm -rf test_dir
+
+echo -e "\n${BLUE}All tests completed.${NC}"
+```
+
+Ce script de test amélioré inclut :
+
+1. Test de gestion des erreurs :
+   - Nombre invalide d'arguments
+   - Fichier d'entrée inexistant
+   - Commandes invalides
+
+2. Tests basiques avec deux commandes
+   - cat + grep
+   - cat + wc
+
+3. Tests avec multiples commandes
+   - Chaînes de 3-4 commandes
+   - Différentes combinaisons de commandes
+
+4. Tests here_doc approfondis
+   - Here_doc simple
+   - Here_doc avec plusieurs commandes
+
+5. Tests avec différents types de commandes
+   - Commandes de recherche (find)
+   - Commandes de tri (sort, uniq)
+   - Commandes de manipulation de texte (rev, cut)
+
+6. Tests avec chemins absolus
+   - Utilisation de chemins complets
+
+7. Tests avec des commandes à arguments multiples
+
+Pour chaque test, le script :
+- Affiche clairement le test en cours
+- Compare la sortie avec le résultat attendu
+- Affiche les différences en cas d'échec
+- Utilise des couleurs pour une meilleure lisibilité
+
+Voulez-vous que j'ajoute d'autres tests spécifiques ou que j'explique plus en détail certains tests ?

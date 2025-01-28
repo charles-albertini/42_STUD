@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:50:43 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/14 01:34:53 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/20 02:21:23 by charlesalbe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

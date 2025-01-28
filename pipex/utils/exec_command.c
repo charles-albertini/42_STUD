@@ -50,7 +50,10 @@ void	execute_command(t_pipex *pipex, char *raw_cmd, char **envp)
 		ft_putstr_fd("Error args\n", 2);
 		exit (1);
 	}
-	pipex->cmd = find_command_path(pipex->cmd_args[0], envp);
+	if (access(pipex->cmd_args[0], X_OK) == 0)
+		pipex->cmd = pipex->cmd_args[0];
+	else
+		pipex->cmd = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd)
 	{
 		free_pipex(pipex);
