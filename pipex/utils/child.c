@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 03:58:50 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/21 20:01:17 by calberti         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:32:14 by charlesalbe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,8 @@ void	first_child(t_pipex *pipex, char **argv, char **envp)
 	pipex->infile = open(argv[1], O_RDONLY);
 	if (pipex->infile < 0)
 	{
-<<<<<<< HEAD
 		error_file(pipex, "Error file1");
-=======
-		error_file(pipex);
 		close(pipex->outfile);
->>>>>>> 5bc0fde38c2b86b914631fed60e1b994f967cd8b
 		exit (1);
 	}
 	if (dup2(pipex->infile, STDIN_FILENO) < 0)
