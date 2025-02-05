@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:42 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/29 18:18:37 by charlesalbe      ###   ########.fr       */
+/*   Updated: 2025/02/01 18:19:44 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv, char **envp)
         if (pid[i] < 0)
             return (perror("Fork error"), 1);
         if (pid[i] == 0)
-            child_process(&pipex, argv, envp, i, here_doc);
+            child_process(&pipex, argv, envp, i, here_doc, argc);
     }
 
     close_pipes(&pipex);

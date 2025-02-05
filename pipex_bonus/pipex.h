@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:47 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/29 18:19:53 by charlesalbe      ###   ########.fr       */
+/*   Updated: 2025/02/01 18:19:25 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	error_dup_2(t_pipex *pipex);
 void    init_pipes(t_pipex *pipex, int cmd_count);
 void    close_pipes(t_pipex *pipex);
 void    free_pipes(t_pipex *pipex);
-void    child_process(t_pipex *pipex, char **argv, char **envp, int i, int here_doc);
+void    child_process(t_pipex *pipex, char **argv, char **envp, int i, int here_doc, int argc);
 void    handle_here_doc(t_pipex *pipex, char *limiter);
 int     is_here_doc(char *arg);
 

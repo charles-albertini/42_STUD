@@ -1,27 +1,16 @@
-D'après le sujet, il y a deux bonus à implémenter :
-
 1. Gérer plusieurs pipes :
-```bash
 ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
-```
 qui doit être équivalent à :
-```bash
 < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
-```
 
 2. Gérer le "here_doc" :
-```bash
 ./pipex here_doc LIMITER cmd cmd1 file
-```
 qui doit être équivalent à :
-```bash
 cmd << LIMITER | cmd1 >> file
-```
 
-Pour commencer, je suggère qu'on aborde d'abord le premier bonus (multiple pipes) car c'est une extension naturelle de votre code actuel. Voici les principales modifications à faire :
 
 1. Modifier la structure t_pipex pour gérer plusieurs pipes :
-```c
+
 typedef struct s_pipex
 {
     int     infile;
@@ -32,10 +21,9 @@ typedef struct s_pipex
     char    **cmd_args;
     char    *cmd;
 }   t_pipex;
-```
 
 2. Modifier la vérification des arguments pour accepter plus de commandes :
-```c
+
 int error_arg(int argc)
 {
     if (argc < 5) // Minimum : file1 cmd1 cmd2 file2
@@ -45,15 +33,9 @@ int error_arg(int argc)
     }
     return (0);
 }
-```
-
-Voulez-vous qu'on commence par implémenter ces modifications ? Nous pourrons ensuite passer à la logique des processus multiples.
-
-D'accord, commençons par ces modifications. Je vais vous guider étape par étape.
 
 1. Premièrement, modifiez la structure dans `pipex.h` :
 
-```c
 typedef struct s_pipex
 {
     int     infile;
@@ -64,11 +46,9 @@ typedef struct s_pipex
     char    **cmd_args;
     char    *cmd;
 }   t_pipex;
-```
 
 2. Ajoutez ces nouvelles fonctions dans `pipex.h` :
 
-```c
 // Nouvelles déclarations à ajouter
 void    init_pipes(t_pipex *pipex, int cmd_count);
 void    close_pipes(t_pipex *pipex);
@@ -78,7 +58,6 @@ void    child_process(t_pipex *pipex, char **argv, char **envp, int i);
 
 3. Modifiez `init.c` pour la nouvelle vérification des arguments :
 
-```c
 int error_arg(int argc)
 {
     if (argc < 5)
@@ -116,11 +95,9 @@ void    init_pipes(t_pipex *pipex, int cmd_count)
         i++;
     }
 }
-```
 
 4. Ajoutez une nouvelle fonction dans `free.c` pour libérer les pipes :
 
-```c
 void    free_pipes(t_pipex *pipex)
 {
     int i;
@@ -146,13 +123,9 @@ void    close_pipes(t_pipex *pipex)
         i++;
     }
 }
-```
-
-Voulez-vous que je vous montre maintenant comment modifier le `main.c` pour gérer les processus multiples ?
 
 Je vais vous montrer comment modifier le `main.c` pour gérer plusieurs commandes. Voici le nouveau main :
 
-```c
 int main(int argc, char **argv, char **envp)
 {
     t_pipex pipex;
@@ -198,11 +171,9 @@ int main(int argc, char **argv, char **envp)
     free_pipes(&pipex);
     return (0);
 }
-```
 
 Maintenant, nous devons créer une nouvelle fonction `child_process` qui remplacera les anciennes fonctions `first_child` et `second_child`. Voici le code à mettre dans `child.c` :
 
-```c
 void    child_process(t_pipex *pipex, char **argv, char **envp, int i)
 {
     // Premier processus
@@ -244,14 +215,10 @@ void    child_process(t_pipex *pipex, char **argv, char **envp, int i)
 
     execute_command(pipex, argv[i + 2], envp);
 }
-```
 
 Ces modifications permettront à votre programme de gérer un nombre variable de commandes. Par exemple :
-```bash
 ./pipex infile cmd1 cmd2 cmd3 outfile
-```
 
-Voulez-vous que j'explique plus en détail certaines parties du code ou que nous passions à la gestion des erreurs et aux tests ?
 
 D'accord, passons maintenant à l'implémentation du deuxième bonus : le "here_doc".
 
@@ -263,13 +230,10 @@ Pour gérer le here_doc, nous devons :
 Voici les modifications à faire :
 
 1. D'abord, ajoutez ces fonctions dans `pipex.h` :
-```c
 void    handle_here_doc(t_pipex *pipex, char *limiter);
 int     is_here_doc(char *arg);
-```
 
 2. Créez un nouveau fichier `here_doc.c` :
-```c
 #include "../pipex.h"
 
 int is_here_doc(char *arg)
