@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:47 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/01 18:19:25 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:32:17 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_pipex
 {
 	int			infile;
 	int			outfile;
+	pid_t		*pid;
 	int			pipe_count; //nb de pipe necessaire
 	int			**pipes; //tableau de pipe au lieu de pipe[2]
 	char		**paths;
@@ -41,7 +42,8 @@ void	free_pipex(t_pipex *pipex);
 char	*find_command_path(char *cmd, char **envp);
 void	execute_command(t_pipex *pipex, char *raw_cmd, char **envp);
 void	second_child(t_pipex *pipex, char **argv, char **envp);
-void	first_child(t_pipex *pipex, char **argv, char **envp);
+// void	first_child(t_pipex *pipex, char **argv, char **envp);
+void	first_child(t_pipex *pipex, char **argv, char **envp, int here_doc, int argc);
 int		error_arg(int argc);
 void	error_file(t_pipex *pipex);
 void	error_dup(t_pipex *pipex);

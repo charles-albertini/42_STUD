@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 06:07:12 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/29 18:02:04 by charlesalbe      ###   ########.fr       */
+/*   Updated: 2025/02/06 16:02:48 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    init_pipes(t_pipex *pipex, int cmd_count)
             free(pipex->pipes);
             return ;
         }
-        if (pipe(pipex->pipes[i]) < 0)
+        if (pipe(pipex->pipes[i]) < 0) // achanger pour minishell 
         {
             perror("Pipe error");
             exit(1);

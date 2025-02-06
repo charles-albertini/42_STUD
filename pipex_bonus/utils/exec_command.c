@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 03:59:09 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/17 05:53:29 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:35:34 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,16 @@ void	execute_command(t_pipex *pipex, char *raw_cmd, char **envp)
 	{
 		free_pipex(pipex);
 		ft_putstr_fd("Error command not found\n", 2);
+		close_pipes(pipex);
+		free_pipes(pipex);
+		free(pipex->pid);
 		exit (1);
 	}
 	if (execve(pipex->cmd, pipex->cmd_args, envp) == -1)
 	{
+		close_pipes(pipex);
+		free_pipes(pipex);
+		free(pipex->pid);
 		free_pipex(pipex);
 		ft_putstr_fd("Error execve\n", 2);
 		exit (1);

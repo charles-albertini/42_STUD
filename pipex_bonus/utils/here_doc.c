@@ -2,7 +2,7 @@
 
 int is_here_doc(char *arg)
 {
-    return (arg && !ft_strncmp(arg, "here_doc", 9));
+    return (arg && !ft_strncmp(arg, "here_doc", 9)); // arg && pour eviter de segfault si il n'y a pas d'arg, ! pour renvoyer 1 au lieu de 0
 }
 
 void    handle_here_doc(t_pipex *pipex, char *limiter)
@@ -36,6 +36,7 @@ void    handle_here_doc(t_pipex *pipex, char *limiter)
     if (pipex->infile < 0)
     {
         unlink(".here_doc_tmp");
+		close(pipex->infile);
         exit(1);
     }
 }

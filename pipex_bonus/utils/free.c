@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charlesalbertini <charlesalbertini@stud    +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 03:59:11 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/29 18:11:50 by charlesalbe      ###   ########.fr       */
+/*   Updated: 2025/02/06 19:07:51 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
