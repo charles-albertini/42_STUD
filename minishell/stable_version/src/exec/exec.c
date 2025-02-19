@@ -27,7 +27,18 @@ int    exec_single_cmd(t_shell *shell, t_command *cmd, t_exec_data *exec)
     if (handle_redirections(cmd, exec) != 0)
         return (1);
     if (is_builtin(cmd->args[0]) != NOT_BUILTIN)
-        return (exec_builtin(shell->cmds, shell->env, shell));
+    {
+        if (cmd->next) // Si le built-in est dans un pipeline, il faut le forker
+        {
+            if (fork() == 0)
+            {
+                exec_builtin(cmd, shell->env, shell);
+                exit(shell->exit_status); // On sort du processus enfant
+            }
+            return (0); // On ne l'exécute pas dans le parent
+        }
+        return (exec_builtin(cmd, shell->env, shell));
+    }
     path_dirs = get_path_dirs(exec->env_arr);
     cmd_path = find_command_path(cmd->args[0], path_dirs);
     if (!cmd_path)
@@ -68,7 +79,7 @@ int    executor(t_shell *shell)
 		current2=current2->next;
 		size++;
 	}
-	if ((is_builtin(current->args[0]) != NOT_BUILTIN) && size == 1)
+	if ((is_builtin(current->args[0]) != NOT_BUILTIN) && size == 1 && !current->next)
 	{
         rl_outstream = stderr;
 		handle_redirections(current, &exec);

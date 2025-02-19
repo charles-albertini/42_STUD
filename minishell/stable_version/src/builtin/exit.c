@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:12:54 by axburin-          #+#    #+#             */
-/*   Updated: 2025/02/18 19:22:13 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/18 20:01:17 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int ft_exit(int argc, char **argv, t_shell *shell)
 		exit_status += 256;  // Ajuster pour être dans la plage 0-255
 	exit_status %= 256;  // Assurer que exit_status est dans la plage [0, 255]
 	printf("exit\n");
-	return(exit_status);
+	exit(exit_status);
 }
 
-//marche pas
+
