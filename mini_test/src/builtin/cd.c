@@ -35,7 +35,6 @@ int ft_cd(t_shell *shell)
 	if(!path)
 	{
 		home = builtin_get_envv(shell->env,"HOME");
-		printf("HOME: %s\n", home);
 		if(chdir(home) == -1)
 		{
 			write(2, "HOME not set\n", 14);

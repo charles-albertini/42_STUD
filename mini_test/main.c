@@ -24,31 +24,10 @@ void handle_sigint(int sig)
 	}
 }
 
-static t_env	*create_simple_env(void)
+int	main(int argc, char **argv, char **envp)
 {
-	t_env	*env;
-	t_env	*path;
-	t_env	*home;
-
-	/* Crée la variable PATH */
-	path = ft_envlst_new("PATH", "/usr/local/bin:/usr/bin:/bin");
-	if (!path)
-		return (NULL);
-	/* Crée la variable HOME */
-	home = ft_envlst_new("HOME", "/Users/user");
-	if (!home)
-	{
-		free_env(path);
-		return (NULL);
-	}
-	/* Lie PATH et HOME */
-	env = path;
-	env->next = home;
-	return (env);
-}
-
-int	main(void)
-{
+	(void)argc;
+	(void)argv;
 	t_shell	shell;
 	t_token	**tokens;
 	char	*line;
@@ -63,7 +42,7 @@ int	main(void)
 	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 
-	shell.env = create_simple_env();
+	shell.env = init_env(envp);
 	while (1)
 	{
 		
@@ -90,8 +69,9 @@ int	main(void)
 		/* Si besoin, libérez aussi la liste des commandes :
 		   free_commands(shell.cmds); */
 	}
+	free(line);
 	rl_clear_history();
-	// free_env(shell.env);
+	free_env(shell.env);
 	return (0);
 }
 
