@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 20:51:47 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/11 16:01:09 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:15:21 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,18 @@ typedef struct s_rules
 	pthread_mutex_t	print_mutex;
 	t_philo			*philos;
 	pthread_t		monitor_thread;
-	pthread_mutex_t death_mutex;
-	pthread_mutex_t meal_mutex;
+	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	meal_mutex;
 }	t_rules;
 
 void		init_philosophers(t_rules *rules);
 void		*monitor(void *arg);
 int			ft_strlen(char *str);
-int 		is_digit(int argc, char **argv);
+int			is_digit(int argc, char **argv);
 int			ft_atoi(char *str);
-int 		ft_parsing(int argc, char **argv, t_rules *rules);
+int			ft_parsing(int argc, char **argv, t_rules *rules);
 void		*philosopher_life(void *arg);
 long long	get_time_in_ms(void);
 void		precise_sleep(long long time_in_ms);
 void		print_action(t_philo *philo, char *msg);
-
-
 #endif

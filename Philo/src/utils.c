@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:29:33 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/11 16:24:39 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:55:17 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	precise_sleep(long long time_in_ms)
 	while ((get_time_in_ms() - start) < time_in_ms)
 		usleep(100);
 }
+
 void	print_action(t_philo *philo, char *msg)
 {
 	long long	timestamp;
@@ -35,7 +36,7 @@ void	print_action(t_philo *philo, char *msg)
 	pthread_mutex_lock(&philo->rules->print_mutex);
 	if (!philo->rules->sim_stop)
 	{
-		timestamp = get_time_in_ms() - philo->rules->start_time; 
+		timestamp = get_time_in_ms() - philo->rules->start_time;
 		printf("%lld %d %s\n", timestamp, philo->id, msg);
 	}
 	pthread_mutex_unlock(&philo->rules->print_mutex);

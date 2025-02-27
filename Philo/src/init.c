@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:19:20 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/11 16:01:30 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:23:54 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ void	init_philosophers(t_rules *rules)
 	rules->start_time = get_time_in_ms();
 	rules->forks = malloc(sizeof(pthread_mutex_t) * rules->nb_philos);
 	rules->philos = malloc(sizeof(t_philo) * rules->nb_philos);
-	i = 0;
-	while (i < rules->nb_philos)
-	{
+	i = -1;
+	while (i++ < rules->nb_philos - 1)
 		pthread_mutex_init(&rules->forks[i], NULL);
-		i++;
-	}
 	pthread_mutex_init(&rules->print_mutex, NULL);
 	i = 0;
 	while (i < rules->nb_philos)
