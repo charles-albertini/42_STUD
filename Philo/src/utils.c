@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:29:33 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/27 15:55:17 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:54:18 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,13 @@ void	precise_sleep(long long time_in_ms)
 void	print_action(t_philo *philo, char *msg)
 {
 	long long	timestamp;
+	int			stop;
 
+	pthread_mutex_lock(&philo->rules->death_mutex);
+	stop = philo->rules->sim_stop;
+	pthread_mutex_unlock(&philo->rules->death_mutex);
 	pthread_mutex_lock(&philo->rules->print_mutex);
-	if (!philo->rules->sim_stop)
+	if (!stop)
 	{
 		timestamp = get_time_in_ms() - philo->rules->start_time;
 		printf("%lld %d %s\n", timestamp, philo->id, msg);
