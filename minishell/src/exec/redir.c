@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochamsa <mochamsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:46:39 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/24 17:19:12 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 04:14:12 by mochamsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,17 @@ static t_redir	*get_last_redir_of_type(t_redir **redirs, int type)
 	return (last);
 }
 
-static int	create_output_files(t_redir **redirs)
+int	create_output_files(t_redir **redirs)
 {
 	int	i;
-	int	fd;
+	int	ret;
 
 	i = 0;
 	while (redirs[i])
 	{
-		if (redirs[i]->type == REDIROUT || redirs[i]->type == APPEND)
-		{
-			fd = open(redirs[i]->file, O_WRONLY | O_CREAT, 0644);
-			if (fd < 0)
-				return (print_file_error(redirs[i]->file, strerror(errno)));
-			close(fd);
-		}
-		if (redirs[i]->type == REDIRIN)
-		{
-			fd = open(redirs[i]->file, O_RDONLY);
-			if (fd < 0)
-				return (print_file_error(redirs[i]->file, strerror(errno)));
-			close(fd);
-		}
+		ret = process_redirection(redirs[i], redirs[i]->type);
+		if (ret)
+			return (ret);
 		i++;
 	}
 	return (0);
@@ -65,6 +54,7 @@ int	handle_input_redir(char *file)
 		return (print_file_error(file, strerror(errno)));
 	if (dup2(fd, STDIN_FILENO) < 0)
 	{
+		printf("2 error\n");
 		close(fd);
 		return (print_file_error(file, strerror(errno)));
 	}

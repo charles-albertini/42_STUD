@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochamsa <mochamsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:25:13 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/24 22:11:30 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 03:32:23 by mochamsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ int	is_builtin(char *cmd)
 	return (NOT_BUILTIN);
 }
 
-void	wait_all_children(t_shell *shell)
+void	wait_c(t_shell *shell)
 {
 	t_command	*cmd;
 	int			status;
 
+	status = 0;
 	cmd = shell->cmds;
 	while (cmd)
 	{
@@ -73,18 +74,17 @@ void	restore_std_fds(t_exec_data *exec)
 	}
 }
 
-void	cleanup_heredoc_files(char **heredoc_files)
+void	clean_heredoc_f(char **heredoc_files, int pid)
 {
-	int	i;
+	int	count;
 
+	count = 0;
 	if (!heredoc_files)
 		return ;
-	i = 0;
-	while (heredoc_files[i])
-	{
-		unlink(heredoc_files[i]);
-		free(heredoc_files[i]);
-		i++;
-	}
-	free(heredoc_files);
+	if (!heredoc_files[0])
+		return ;
+	while (heredoc_files[count])
+		count++;
+	cleanup_heredocs(heredoc_files, count, pid);
+	heredoc_files = NULL;
 }

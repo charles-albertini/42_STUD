@@ -3,42 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochamsa <mochamsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:27:52 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/24 22:43:32 by calberti         ###   ########.fr       */
+/*   Updated: 2025/02/27 04:21:05 by mochamsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile sig_atomic_t	g_sig_received = 0;
+static int	exec_builtin_cmd(t_shell *shell, t_command *cmd, t_exec_data *exec)
+{
+	int	status;
+
+	if (cmd->next)
+	{
+		if (cmd->pid == 0)
+		{
+			status = exec_builtin(cmd, shell->env, shell, exec);
+			free_env_array(&exec->env_arr);
+			free_env(shell->env);
+			frcm(&shell->cmds);
+			exit(status);
+		}
+		free_env_array(&exec->env_arr);
+		free_env(shell->env);
+		return (0);
+	}
+	status = exec_builtin(cmd, shell->env, shell, exec);
+	free_env_array(&exec->env_arr);
+	return (status);
+}
 
 int	exec_single_cmd(t_shell *shell, t_command *cmd, t_exec_data *exec)
 {
 	char	*cmd_path;
+	char	**path_dirs;
 
+	if (handle_redirections(cmd) != 0)
+		return (1);
 	if (!cmd->args || !cmd->args[0])
 		return (0);
-	backup_std_fds(exec);
-	if (handle_redirections(cmd) != 0)
-		return (restore_std_fds(exec), 1);
 	if (is_builtin(cmd->args[0]) != NOT_BUILTIN)
-	{
-		if (cmd->next)
-		{
-			if (fork() == 0)
-				exit(exec_builtin(cmd, shell->env, shell));
-			return (restore_std_fds(exec), 0);
-		}
-		return (restore_std_fds(exec), exec_builtin(cmd, shell->env, shell));
-	}
-	cmd_path = find_command_path(cmd->args[0], get_path_dirs(exec->env_arr));
+		return (exec_builtin_cmd(shell, cmd, exec));
+	path_dirs = get_path_dirs(exec->env_arr);
+	cmd_path = find_command_path(cmd->args[0], path_dirs);
+	ft_free_args(path_dirs);
 	if (!cmd_path)
-		return (handle_cmd_not_found(cmd->args[0]), restore_std_fds(exec), 127);
+		return (hcnf(cmd->args[0]), clean_heredoc_f(shell->here_docs, cmd->pid),
+			127);
 	if (execve(cmd_path, cmd->args, exec->env_arr) == -1)
-		return (free(cmd_path), print_exec_error(cmd->args[0],
-				strerror(errno)), restore_std_fds(exec), 126);
+		return (free(cmd_path), print_exec_error(cmd->args[0], strerror(errno)),
+			126);
 	return (0);
 }
 
@@ -54,52 +70,25 @@ void	init_exec_data(t_exec_data *exec, t_shell *shell)
 int	executor(t_shell *shell)
 {
 	t_exec_data	exec;
-	t_command	*current;
-	int			pipe_fds[2];
-	int			prev_pipe_read;
-	char		**heredoc_files;
+	t_pipe_data	pipe_data;
+	t_executor	executor;
+	int			status;
 
-	current = shell->cmds;
-	init_exec_data(&exec, shell);
-	heredoc_files = process_heredocs(shell->cmds);
-	if (verif_heredoc(heredoc_files, current, shell) == 1)
+	init_executor(&executor, shell, &exec, &pipe_data);
+	if (handle_hrdc_e(&executor) == 1)
 		return (1);
-	if ((is_builtin(current->args[0]) != NOT_BUILTIN) && cmd_size(current) == 1
-		&& !current->next && cmd_size_redi(current) == 0)
-	{
-		rl_outstream = stderr;
-		backup_std_fds(&exec);
-		handle_redirections(current);
-		exec_builtin(shell->cmds, shell->env, shell);
-		restore_std_fds(&exec);
-		cleanup_heredoc_files(heredoc_files);
-		return (shell->exit_status);
-	}
-	prev_pipe_read = -1;
-	while (current)
-	{
-		current->pid = pipe_fork(current, pipe_fds, heredoc_files);
-		if (current->pid == 1)
-			return (1);
-		if (current->pid == 0)
-		{
-			if (prev_pipe_read != -1)
-			{
-				dup2(prev_pipe_read, STDIN_FILENO);
-				close(prev_pipe_read);
-			}
-			if (current->next)
-			{
-				close(pipe_fds[0]);
-				dup2(pipe_fds[1], STDOUT_FILENO);
-				close(pipe_fds[1]);
-			}
-			exit(exec_single_cmd(shell, current, &exec));
-		}
-		prev_pipe_read = update_pipe_read(prev_pipe_read, current, pipe_fds);
-	}
-	wait_all_children(shell);
-	cleanup_heredoc_files(heredoc_files);
-	g_sig_received = 0;
-	return (shell->exit_status);
+	status = handle_btn_e(&executor);
+	if (status == 0)
+		return (status);
+	if (status == -1)
+		return (-1);
+	executor.pipe_data->prev_pipe_read = -1;
+	if (execute_cmd_e(&executor) == 1)
+		return (1);
+	g_sig_received = 2;
+	free_env_array(&executor.exec->env_arr);
+	clean_heredoc_f(executor.heredoc_files, 1);
+	free(executor.heredoc_files);
+	executor.heredoc_files = NULL;
+	return (wait_c(shell), shell->exit_status);
 }

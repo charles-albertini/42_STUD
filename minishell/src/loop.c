@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: axburin- <axburin-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochamsa <mochamsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 17:14:06 by axburin-          #+#    #+#             */
-/*   Updated: 2025/02/23 17:47:34 by axburin-         ###   ########.fr       */
+/*   Updated: 2025/02/27 04:16:50 by mochamsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_loop(t_shell *shell)
 
 	while (1)
 	{
-		line = readline("2MAC-Shell$ ");
+		line = readline("\033[0;31mM\033[0;33m2\033[0;31mAC-Shell$\033[0m");
 		if (!line)
 			break ;
 		if (*line)
@@ -33,10 +33,10 @@ void	ft_loop(t_shell *shell)
 			continue ;
 		}
 		shell->cmds = parse_tokens(tokens);
-		executor(shell);
-		free_tokens(tokens);
+		(free_tokens(tokens), executor(shell));
+		if (shell->cmds)
+			frcm(&shell->cmds);
 		free(line);
 	}
 	(free(line), rl_clear_history());
-	free_env(shell->env);
 }
