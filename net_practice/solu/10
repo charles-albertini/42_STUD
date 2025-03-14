@@ -1,0 +1,22 @@
+goal 1:
+
+- on prend le masque de R11 qu'on met a H11 et H21
+- .128 (/25) on a 1-126 et 129-254
+- on a deja 1 et 2 donc on met H21 a 3
+
+- ensuite pour internet on met la destination de R1 mais avec .0/24 au lieu de .128/26
+- la derniere destination de R1 est default parceque c'est ce qui vient de R11
+
+- la seul difficulter est de mettre R22 et H31 en masque .252 avec .193 et .194 a la fin
+
+
+/25 .128
+168.240.249.0	168.240.249.1 - 168.240.249.126		168.240.249.127
+168.240.249.128	168.240.249.129 - 168.240.249.254	168.240.249.255
+
+
+/26 .192
+168.240.249.0	168.240.249.1 - 168.240.249.62		168.240.249.63
+168.240.249.64	168.240.249.65 - 168.240.249.126	168.240.249.127
+168.240.249.128	168.240.249.129 - 168.240.249.190	168.240.249.191
+168.240.249.192	168.240.249.193 - 168.240.249.254	168.240.249.255

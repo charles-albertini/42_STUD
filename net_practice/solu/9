@@ -1,0 +1,36 @@
+goal 1:
+
+- on met le meme masque a A1, B1 et R11
+- .128 on a 1-126 et 129-254, on choisit au hasard
+- host A et B pointe vers R11
+
+goal 2:
+
+- on a deja l'IP de R23 (111.68.152.154)
+- avec un msqaue de /18 il faut changer les deux dernier, comme R23 et D1 sont dans 128-191
+  il faut choisir une autre zone (192-255 par exemple) et aussi changer les dernier
+
+
+/18
+168.240.0.0	168.240.0.1 - 168.240.63.254	168.240.63.255
+168.240.64.0	168.240.64.1 - 168.240.127.254	168.240.127.255
+168.240.128.0	168.240.128.1 - 168.240.191.254	168.240.191.255
+168.240.192.0	168.240.192.1 - 168.240.255.254	168.240.255.255
+
+goal 3:
+
+- il faut juste mettre l'IP de menson avec /25 (qui correspond a .128)
+
+goal 4:
+
+- il faut d'abord gerer R13 et R21, avec un masque de .252 (/30) on va de un en un.
+- on met donc 2.2.2.1 et 2.2.2.2
+- ensuite R1 pointe vers R21 et R2 pointe vers R13
+
+goal 5:
+
+- deja gerer avec les 2 routes du goal 4
+
+goal 6:
+
+- il faut juste mettre l'IP de cation avec son msque (/18) dans une des destination de internet
