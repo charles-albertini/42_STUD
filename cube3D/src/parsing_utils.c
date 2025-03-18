@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:09:40 by calberti          #+#    #+#             */
-/*   Updated: 2025/03/17 21:17:45 by calberti         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:43:18 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,36 +94,5 @@ char *trim_left(char *str)
 }
 
 
-void mark_outer_spaces(char **map, int height, int width)
-{
-    // Vérifier les bords horizontaux
-    for (int x = 0; x < width; x++)
-    {
-        if (map[0][x] == ' ') 
-			flood_fill_mark(map, x, 0, height, width);
-        if (map[height - 1][x] == ' ') 
-			flood_fill_mark(map, x, height - 1, height, width);
-    }
 
-    // Vérifier les bords verticaux
-    for (int y = 0; y < height; y++)
-    {
-        if (map[y][0] == ' ') 
-			flood_fill_mark(map, 0, y, height, width);
-        if (map[y][width - 1] == ' ') 
-			flood_fill_mark(map, width - 1, y, height, width);
-    }
-}
 
-void flood_fill_mark(char **map, int x, int y, int height, int width)
-{
-    if (x < 0 || y < 0 || x >= width || y >= height || map[y][x] != ' ')
-        return;
-
-    map[y][x] = 'O'; // Marquer comme espace extérieur
-
-    flood_fill_mark(map, x + 1, y, height, width);
-    flood_fill_mark(map, x - 1, y, height, width);
-    flood_fill_mark(map, x, y + 1, height, width);
-    flood_fill_mark(map, x, y - 1, height, width);
-}

@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:36:58 by calberti          #+#    #+#             */
-/*   Updated: 2025/03/17 21:52:24 by calberti         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:05:33 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int parse_map_line(char *line, t_config *config)
     char **new_grid;
     int i;
     
+	i =0;
     // Si c'est une ligne vide après le début de la carte, c'est une erreur
     if (is_empty_line(line))
     {
@@ -73,8 +74,11 @@ int parse_map_line(char *line, t_config *config)
         return (0);
     
     // Copier les lignes existantes
-    for (i = 0; i < config->map.height; i++)
+    while (i < config->map.height)
+	{
         new_grid[i] = config->map.grid[i];
+		i++;
+	}
     
     // Ajouter la nouvelle ligne
     new_grid[config->map.height] = ft_strdup(line);
