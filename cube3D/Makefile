@@ -1,4 +1,4 @@
-NAME    := cub3D
+NAME    := Cub3D
 CFLAGS  := -Wextra -Wall -Werror
 LIBMLX  := MLX42
 MLX		:= MLX42
