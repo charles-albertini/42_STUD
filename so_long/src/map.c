@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:56:50 by calberti          #+#    #+#             */
-/*   Updated: 2025/01/15 19:13:12 by calberti         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:01:05 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ char	**read_map(char *script_map)
 		map = NULL;
 	free(temp_map);
 	close(fd);
+
+	
 	return (map);
 }

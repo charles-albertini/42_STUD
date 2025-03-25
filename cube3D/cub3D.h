@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:55:35 by calberti          #+#    #+#             */
-/*   Updated: 2025/03/19 19:32:58 by calberti         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:53:23 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
+# include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -24,16 +25,141 @@
 # include <fcntl.h>
 # include <stdint.h>
 # include <errno.h>
+# include <math.h>
 
 # define BUFFER_SIZE 50
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+# define MINI_MAP_SCALE 0.2
+# define T_SIZE 10
+
+typedef struct s_player
+{
+	char	dir;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int		has_moved;
+	int		move_x;
+	int		move_y;
+	int		rotate;
+}	t_player;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	camera_y;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	wall_dist;
+	double	wall_x;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
+
+typedef struct s_utils
+{
+	t_ray			*ray;
+	mlx_texture_t	*texture;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+	uint32_t		color;
+	int				y;
+}	t_utils;
+typedef struct s_mapinf
+{
+	int			fd;
+	int			line_count;
+	char		*path;
+	char		**file;
+	int			height;
+	int			width;
+	int			index_end_of_map;
+}	t_mapinf;
+
+typedef struct s_texinfo
+{
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	int				*floor;
+	int				*ceiling;
+	unsigned long	hex_floor;
+	unsigned long	hex_ceiling;
+	int				size;
+	int				index;
+	double			step;
+	double			pos;
+	int				x;
+	int				y;
+}	t_texinfo;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	int			win_height;
+	int			win_width;
+	t_mapinf	mapinf;
+	char		**map;
+	t_player	player;
+	t_ray		ray;
+	int			**texture_pixels;
+	int			**textures;
+	t_texinfo	texinfo;
+	// t_img		minimap;
+}	t_data;
+
+typedef struct s_img
+{
+	void	*img;
+	int		*addr;
+	int		pixel_bits;
+	int		size_line;
+	int		endian;
+}	t_img;
+
+// parsing
 
 typedef struct s_texture
 {
-	char	*path;
-	void	*img;
-	int		width;
-	int		height;
+	char			*path;
+	void			*img;
+	int				width;
+	int				height;
 }		t_texture;
+
+typedef struct s_images
+{
+	mlx_image_t	*north;
+	mlx_image_t	*south;
+	mlx_image_t	*west;
+	mlx_image_t	*east;
+}				t_images;
+
+typedef struct s_textures
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+}				t_textures;
 
 typedef struct s_color
 {
@@ -55,13 +181,20 @@ typedef struct s_map
 
 typedef struct s_config
 {
-	t_texture	north;
-	t_texture	south;
-	t_texture	west;
-	t_texture	east;
-	t_color		floor;
-	t_color		ceiling;
-	t_map		map;
+	t_texture			north;
+	t_texture			south;
+	t_texture			west;
+	t_texture			east;
+	struct s_images		*imag;
+	struct s_textures	*textu;
+	t_color				floor;
+	t_color				ceiling;
+	mlx_t				*mlx;
+	t_map				map;
+	t_data				*data;
+	mlx_image_t			*current_image;
+	int					keys[512];
+	double				movespeed;
 }		t_config;
 
 //PARSING
@@ -76,6 +209,7 @@ int		parse_cub_file(char *filename, t_config *config);
 int		is_all_num(char *str);
 char	*trim_left(char *str);
 void	flood_fill_mark(char **map, int x, int y, t_config *config);
+int		flood_fill_2(char **map, int x, int y, t_config *config);
 void	mark_outer_spaces(char **map, t_config *config);
 int		ft_strlen_width(char *str);
 int		pars_position(char *line, t_config *config);
@@ -104,4 +238,46 @@ int		find_player_position(t_config *config);
 int		check_map_borders(t_config *config);
 int		flood_fill(char **map, int x, int y, t_config *config);
 
+//init exec
+
+void	init_ray(t_config *config);
+void	init_player(t_config *config);
+
+// a revoir 
+void	init_map(t_config *config);
+void	init_img_clean(t_img *img);
+void	init_data(t_config *config);
+
+//texture et image
+void	get_textures(t_config *config);
+void	get_images(t_config *conf);
+void	draw_map(t_config *config);
+void	my_key_hook(mlx_key_data_t keydata, void *param);
+void	init_all(t_config *config );
+
+//RAY cast
+void	ft_calc_delta_dist(t_config *config);
+void	ft_calc_step_and_side_dist(t_config *config);
+void	perf_dda(t_config *config);
+void	calc_wall_height(t_config *config);
+void	ft_cast_rays(t_config *config);
+
+//TEST
+void	draw_wall(int x, t_config *config, mlx_image_t *img);
+void	render_frame(t_config *config);
+void	init_player_from_config(t_config *config);
+void	move_player(t_config *config);
+void	continuous_render(void *param);
+void	start_game_engine(t_config *config);
+void	update_player_position(t_config *config);
+void	handle_rotation(t_config *config);
+void	handle_movement(t_config *config);
+void	handle_rotation2(t_config *config);
+void	move_forward_backward(t_config *config, double move_speed);
+void	move_strafe(t_config *config, double move_speed);
+char	*supp_zero(char *str);
+void	draw_minimap(t_config *game);
+void	cleanup(t_config *conf);
+int		update_player_xy(int player, int dir);
+int		verif_move(t_config *config, double new_y, double new_x);
 #endif

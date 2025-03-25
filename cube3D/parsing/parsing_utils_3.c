@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:44:55 by calberti          #+#    #+#             */
-/*   Updated: 2025/03/19 19:34:28 by calberti         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:04:42 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,30 @@ char	*ft_strdup_tab_to_space(char *src)
 	}
 	cpy[j] = '\0';
 	return (cpy);
+}
+
+char	*supp_zero(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	while (len >= 0 && str[len] != '1')
+	{
+		if (str[len] == '0')
+		{
+			str[len] = ' ';
+			len --;
+		}
+		else
+			len --;
+	}
+	return (str);
+}
+
+int	update_player_xy(int player, int dir)
+{
+	if (dir > player)
+		return (1);
+	else
+		return (-1);
 }

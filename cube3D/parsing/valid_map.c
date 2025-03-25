@@ -6,7 +6,7 @@
 /*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 12:03:43 by calberti          #+#    #+#             */
-/*   Updated: 2025/03/19 19:35:50 by calberti         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:34:22 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	validate_map(t_config *config)
 		return (0);
 	if (!check_map_borders(config))
 		return (0);
+	if (config->map.height <= 1)
+		return (printf("Error\nLonely player\n"), 0);
 	return (1);
 }
 
@@ -63,6 +65,12 @@ int	normalize_map(t_config *config)
 	normalize = malloc(sizeof(char *) * config->map.height);
 	if (!normalize)
 		return (0);
+	while (i < config->map.height)
+	{
+		config->map.grid[i] = supp_zero(config->map.grid[i]);
+		i ++;
+	}
+	i = 0;
 	normalize = make_normalize(config, normalize, i, j);
 	i = 0;
 	while (i < config->map.height)
@@ -77,29 +85,29 @@ int	normalize_map(t_config *config)
 
 int	check_map_borders(t_config *config)
 {
-	char	**copy;
-	int		i;
+	int		x;
+	int		y;
 	int		res;
 
-	copy = malloc(sizeof(char *) * config->map.height);
-	i = 0;
-	while (i < config->map.height)
+	x = 0;
+	y = 0;
+	mark_outer_spaces(config->map.grid, config);
+	while (y < config->map.height)
 	{
-		copy[i] = ft_strdup(config->map.grid[i]);
-		if (!clean_copy(copy, i))
-			return (0);
-		i++;
+		x = 0;
+		while (x < config->map.width)
+		{
+			if (config->map.grid[y][x] == '0' || config->map.grid[y][x] == 'N'
+				|| config->map.grid[y][x] == 'S' | config->map.grid[y][x] == 'W'
+				|| config->map.grid[y][x] == 'E')
+			{
+				res = flood_fill(config->map.grid, x, y, config);
+				if (!res)
+					return (printf("Error\nMap is not properly closed\n"), 0);
+			}
+			x ++;
+		}
+		y ++;
 	}
-	mark_outer_spaces(copy, config);
-	res = flood_fill(copy, config->map.player_x, config->map.player_y, config);
-	i = 0;
-	while (i < config->map.height)
-	{
-		free(copy[i]);
-		i++;
-	}
-	free(copy);
-	if (!res)
-		printf("Error\nMap is not properly closed\n");
-	return (res);
+	return (1);
 }
