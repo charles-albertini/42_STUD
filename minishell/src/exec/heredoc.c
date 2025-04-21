@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochamsa <mochamsa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: calberti <calberti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 16:29:45 by calberti          #+#    #+#             */
-/*   Updated: 2025/02/27 06:56:54 by mochamsa         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:20:12 by calberti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	g_sig_received = 0;
+// static int	g_sig_received = 0;
 
 static void	heredoc_sigint_handler(int sig)
 {
