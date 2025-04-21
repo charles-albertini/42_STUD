@@ -1,0 +1,11 @@
+- on implemente un systeme de "materias" et de personnage qui peuvent
+	les utiliser
+
+- on a une classe abstraite de base: AMateria
+- des classe concrete Ice et Cure qui herite de AMateria 
+
+- une interface ICharacter pour les personnage
+- unee classe concrete Character qui implemente ICharacter
+
+- une interface IMateriaSource pour creer des materias
+- une classe concrete MateriaSource qui implemente IMateriaSource
