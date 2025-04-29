@@ -18,15 +18,15 @@ class NbNotFound : public std::exception
 };
 
 
-template <typename type>
-int easyfind(type &array, int nb)
+template <typename T>
+typename T::iterator easyfind(T &container, int value)
 {
-	typename type:: iterator it;
+    typename T::iterator it = std::find(container.begin(), container.end(), value);
+    
+    if (it == container.end())
+        throw NbNotFound();
 
-	for (it = array.begin(); it != array.end(); it ++)
-		if (*it == nb)
-			return(*it);
-	throw NbNotFound();
+    return it;
 }
 
 

@@ -6,8 +6,6 @@ int main()
 {
     std::vector<int> array1;
 	std::list<int> array2;
-	
-	int find;
 
 	array1.push_back(1);
 	array1.push_back(8);
@@ -15,8 +13,8 @@ int main()
 
 	try
 	{
-		find = easyfind(array1, 8);
-		std::cout << find << std::endl;
+		std::vector<int>::iterator find = easyfind(array1, 3);
+		std::cout << *find << std::endl;
 	}
 	catch (const std::exception& e) 
 	{
@@ -29,8 +27,8 @@ int main()
 
 	try
 	{
-		find = easyfind(array2, 1);
-		std::cout << find << std::endl;
+		std::list<int>::iterator find = easyfind(array2, 1);
+		std::cout << *find << std::endl;
 	}
 	catch (const std::exception& e) 
 	{
