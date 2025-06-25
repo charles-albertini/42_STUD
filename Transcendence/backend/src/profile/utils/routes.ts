@@ -1,0 +1,32 @@
+import fp from 'fastify-plugin';
+import { getUser } from '../routes_def/getUser';
+import { deleteUser } from '../routes_def/deleteUser';
+import { update } from '../routes_def/update';
+import { changePassword } from '../routes_def/changePassword';
+import { getHistory } from '../routes_def/getHistory';
+import { friendrequest } from '../routes_def/friendRequest';
+import { pendingRequest } from '../routes_def/PendingRequest';
+import { acceptRequest } from '../routes_def/acceptRequest';
+import { deleteFriendship } from '../routes_def/deleteFriendship';
+import { declineRequest } from '../routes_def/declineRequest';
+import { friendList } from '../routes_def/friendList';
+import { anonymization } from '../routes_def/anonymization';
+import { getPersoData } from '../routes_def/getPersoData';
+import { getFriendsOnlineStatus } from '../routes_def/getOnlineStatus';
+
+export default fp(async function routes_profile(fastify: any) {
+	fastify.get('/user/:username', { preHandler: fastify.authenticate }, getUser);
+	fastify.delete('/delete', { preHandler: fastify.authenticate }, deleteUser);
+	fastify.patch('/update', { preHandler: fastify.authenticate }, update);
+	fastify.patch('/changePassword', { preHandler: fastify.authenticate }, changePassword);
+	fastify.get('/history/:username', { preHandler: fastify.authenticate }, getHistory);
+	fastify.post('/friendRequest/:username', { preHandler: fastify.authenticate }, friendrequest);
+	fastify.get('/friendRequest/pending', { preHandler: fastify.authenticate }, pendingRequest);
+	fastify.patch('/friendRequest/accept', { preHandler: fastify.authenticate }, acceptRequest);
+	fastify.patch('/friendRequest/delete', { preHandler: fastify.authenticate }, deleteFriendship);
+	fastify.patch('/friendRequest/decline', { preHandler: fastify.authenticate }, declineRequest);
+	fastify.get('/friendList', { preHandler: fastify.authenticate }, friendList );
+	fastify.patch('/anonymization', { preHandler: fastify.authenticate }, anonymization);
+	fastify.get('/data', { preHandler: fastify.authenticate }, getPersoData);
+	fastify.get('/friends/online-status', { preHandler: fastify.authenticate }, getFriendsOnlineStatus);
+});
